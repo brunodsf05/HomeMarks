@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "HomeMarks",
+  "version": "0",
+  "description": "A bookmarks launcher/manager.",
+  "permissions": [
+    "storage",
+    "bookmarks"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "action": {
+    "default_popup": "index.html"
+  }
+}
