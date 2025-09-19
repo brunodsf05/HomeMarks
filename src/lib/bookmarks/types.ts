@@ -22,8 +22,8 @@ export interface BookmarkUpdateArgs {
  * Basic operations to read/write from the browser's bookmark database.
  */
 export interface BookmarkOperations {
-  create(bookmark: BookmarkCreateArgs): Promise<Bookmark>;
-  update(bookmark: BookmarkUpdateArgs): Promise<Bookmark>;
+  create(bookmark: BookmarkCreateArgs): Promise<void>;
+  update(bookmark: BookmarkUpdateArgs): Promise<void>;
   delete(id: string): Promise<void>;
   get(id: string, depth?: number): Promise<Bookmark>;
   getChildren(id: string, depth?: number): Promise<Bookmark[]>;
