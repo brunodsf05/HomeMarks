@@ -1,4 +1,4 @@
-import type { BookmarkOperations as BmOp } from '../types';
+import type { Bookmark, BookmarkOperations as BmOp } from '../types';
 
 
 
@@ -17,7 +17,17 @@ export const deleteBookmark: BmOp['delete'] = async (id: string) => {
   await new Promise(() => null);
 };
 
-export const getBookmark: BmOp['get'] = async (id: string) => {
-  console.log('Called getBookmark from chrome.ts');
-  return { id: "wip", title: "template" };
-};
+export const getBookmark: BmOp['get'] = async (id: string) =>
+  chrome.bookmarks
+    .getSubTree(id)
+    .then(nodes => {
+      if (nodes.length === 0)
+        throw new Error(`Bookmark with id "${id}" not found`);
+
+      return nodes[0] as unknown as Bookmark;
+    })
+    .catch(err => {
+      throw new Error(
+        err instanceof Error ? err.message : `Failed to get bookmark: ${err}`
+      );
+    });
