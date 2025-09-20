@@ -5,7 +5,7 @@ const App = () => {
   bookmarkOperations.create("", "Test");
   bookmarkOperations.update("");
   bookmarkOperations.delete("");
-  bookmarkOperations.get("");
+  console.log(bookmarkOperations.get("0"));
   bookmarkOperations.getChildren("");
 
   return (
