@@ -83,4 +83,28 @@ export class BookmarkService implements IBookmarkService {
   public isFolder(bookmark: Bookmark): boolean {
     return bookmark.url === undefined;
   }
+
+  public getFolderRange(oldest: Bookmark, youngest: Bookmark): Bookmark[] {
+    // DFS to find the path from oldest to youngest
+    function findPath(parent: Bookmark, targetId: string): Bookmark[] | null {
+      if (parent.id === targetId) return [parent]; // Target was found, stop searching
+
+      if (parent.children) { // Only explore children from folders
+        for (const child of parent.children) {
+          const path = findPath(child, targetId);
+          if (path) return [parent, ...path]; // Target was found in subtree, generate path from targetId to parent
+        }
+      }
+
+      return null; // Target was not found in this subtree, stop searching
+    }
+
+    // Get the youngest folder id or exit earlier for safety
+    const isYoungestFolder = this.isFolder(youngest);
+    if (!isYoungestFolder && youngest.parentId === undefined) return [];
+    const youngestFolderId: string = isYoungestFolder ? youngest.id : youngest.parentId!;
+
+    // Start DFS
+    return findPath(oldest, youngestFolderId) ?? [];
+  }
 }

@@ -76,5 +76,17 @@ export interface IBookmarkService {
   getWellKnown(type: WellKnownFolders): Promise<Bookmark>;
 
   // --- Utilities ---
+  /**
+   * @param bookmark The bookmark to check.
+   * @returns True if the bookmark is a folder, false if it's a URL bookmark.
+   */
   isFolder(bookmark: Bookmark): boolean;
+  /**
+   * Returns all bookmark folders from the oldest ancestor (root) to the youngest descendant
+   * (leaf), including both endpoints. Example: [root, ..., leaf]
+   *
+   * @param root The top-level ancestor folder to start from. It must contain all of its children.
+   * @param leaf The deepest folder to end at. If it is a folder, it will be included.
+   */
+  getFolderRange(root: Bookmark, leaf: Bookmark): Bookmark[];
 }
