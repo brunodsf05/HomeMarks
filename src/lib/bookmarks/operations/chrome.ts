@@ -27,11 +27,9 @@ export const deleteBookmark: BmOp['delete'] = async (id: string) => {
   await new Promise(() => null);
 };
 
-export const getBookmark: BmOp['get'] = async (id: string, depth: number = 0) => {
+export const getBookmark: BmOp['get'] = async (id: string) => {
   // @ts-ignore
   const _id = id;
-  // @ts-ignore
-  const _depth = depth;
   console.log('Called getBookmark from chrome.ts');
   return { id: "wip", title: "template" };
 };
