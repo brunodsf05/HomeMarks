@@ -1,0 +1,1 @@
+export { BookmarkComponent } from './Bookmark';

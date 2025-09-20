@@ -1,5 +1,6 @@
 import { useState, useEffect, use } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
+import { BookmarkComponent } from "@/components/common/bookmarks";
 
 const App = () => {
   const [bookmarks, setBookmarks] = useState<Bookmark>();
@@ -18,15 +19,19 @@ const App = () => {
       {
         bookmarks === undefined
           ? <p>Loading...</p>
-          : <li>
+          : <ul>
             {
-              bookmarks?.children?.map((ba) => (
-                <ul>
-                  {ba.title} - {ba.url === undefined ? "Folder" : <a href={ba.url}>{ba.url}</a>}
-                </ul>
+              bookmarks?.children?.map((b) => (
+                <li>
+                  <BookmarkComponent bookmark={b} onClick={(b) => {
+                    console.log(
+                      `${BookmarkService.getInstance().isFolder(b) ? 'Folder' : 'Url'} clicked!`
+                    );
+                  }} />
+                </li>
               ))
             }
-          </li>
+          </ul>
       }
     </>
   );
