@@ -1,6 +1,6 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
-import { BookmarkComponent } from "@/components/common/bookmarks";
+import { Visor } from "@/Visor";
 
 const App = () => {
   const [bookmarks, setBookmarks] = useState<Bookmark>();
@@ -19,19 +19,7 @@ const App = () => {
       {
         bookmarks === undefined
           ? <p>Loading...</p>
-          : <ul>
-            {
-              bookmarks?.children?.map((b) => (
-                <li>
-                  <BookmarkComponent bookmark={b} onClick={(b) => {
-                    console.log(
-                      `${BookmarkService.getInstance().isFolder(b) ? 'Folder' : 'Url'} clicked!`
-                    );
-                  }} />
-                </li>
-              ))
-            }
-          </ul>
+          : <Visor rootBookmark={bookmarks} />
       }
     </>
   );
