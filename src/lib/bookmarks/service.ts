@@ -81,6 +81,6 @@ export class BookmarkService implements IBookmarkService {
 
   // --- Utilities ---
   public isFolder(bookmark: Bookmark): boolean {
-    return bookmark.url !== undefined;
+    return bookmark.url === undefined;
   }
 }
