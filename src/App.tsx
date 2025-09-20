@@ -1,12 +1,11 @@
-import { bookmarkOperations } from "@/lib/bookmarks";
+import { BookmarkService } from "@/lib/bookmarks";
 
 const App = () => {
   // TODO: Remove this, just for testing
-  bookmarkOperations.create("", "Test");
-  bookmarkOperations.update("");
-  bookmarkOperations.delete("");
-  console.log(bookmarkOperations.get("0"));
-  bookmarkOperations.getChildren("");
+  BookmarkService.getInstance()
+    .getWellKnown("bar")
+    .then(console.log)
+    .catch(console.error);
 
   return (
     <p>Hello world!</p>

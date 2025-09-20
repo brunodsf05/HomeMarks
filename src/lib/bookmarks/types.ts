@@ -1,26 +1,80 @@
+/**
+ * Contains the data of a bookmark. This contains data common for Chrome and Firefox.
+ */
 export interface Bookmark {
   id: string;
-  title: string;
-  url?: string;
   parentId?: string;
+  title: string;
+  /**
+   * The URL of the bookmark. Omitted for folders.
+   */
+  url?: string;
   children?: Bookmark[];
+  folderType?: string;
 }
 
+export type WellKnownFolders = "bar";
+
 /**
- * Basic operations to read/write from the browser's bookmark database.
+ * Declares what a BookmarkService should do.
  */
-export interface BookmarkOperations {
+export interface IBookmarkService {
+  // ---- CRUD ----
   /**
-   * Creates a bookmark url/folder under the given parent folder.
-   * Check `url`param to know how to make the new bookmark an url or folder.
+   * Creates a new bookmark inside a folder.
    *
-   * @param parentId The id of the parent folder where to create the new bookmark.
-   * @param title The title that the new bookmark will have.
-   * @param url If omitted, the new bookmark will be a folder. If provided, it will be a url bookmark.
+   * @param folderId The id of the folder.
+   * @param title The title of the new bookmark.
+   * @param url The url of the new bookmark.
    */
-  create(parentId: string, title: string, url?: string): Promise<void>;
+  createUrl(folderId: string, title: string, url: string): Promise<void>;
+  /**
+   * Creates a new folder inside another folder.
+   *
+   * @param folderId The id of the folder.
+   * @param title The title of the new bookmark.
+   * @param url The url of the new bookmark.
+   */
+  createFolder(folderId: string, title: string): Promise<void>;
+  /**
+   * Updates the specified properties of a bookmark or folder.
+   * Unspecified properties will be left unchanged.
+   *
+   * @param id The identifier of the bookmark to update.
+   * @param title The new title to set.
+   * @param url The new url to set. It is ignored when updating a folder.
+   */
   update(id: string, title?: string, url?: string): Promise<void>;
+  /**
+   * Deletes a bookmark or folder.
+   *
+   * @param id The identifier of the bookmark/folder to delete.
+   */
   delete(id: string): Promise<void>;
+  /**
+   * Gets the bookmark or folder with the given id.
+   * 
+   * @param id The bookmark to get. Beware that some folder ids (like "bookmarks-bar" folder type)
+   *           change depending on the browser engine. (For Chrome it's "1", for Firefox "toolbar_____").
+   *
+   * @returns The bookmark or folder with the given id.
+   */
   get(id: string): Promise<Bookmark>;
-  getChildren(id: string): Promise<Bookmark[]>;
+  /**
+   * Gets the root bookmark folder that contains all bookmarks from the user's browsers.
+   *
+   * @returns The root bookmark folder.
+   */
+  getRoot(): Promise<Bookmark>;
+  /**
+   * Gets the well-known folder of the given type like "bookmarks bar".
+   *
+   * @param type The type of well-known folder to get.
+   * 
+   * @returns A bookmark folder.
+   */
+  getWellKnown(type: WellKnownFolders): Promise<Bookmark>;
+
+  // --- Utilities ---
+  isFolder(bookmark: Bookmark): boolean;
 }
