@@ -25,6 +25,6 @@ export interface BookmarkOperations {
   create(bookmark: BookmarkCreateArgs): Promise<void>;
   update(bookmark: BookmarkUpdateArgs): Promise<void>;
   delete(id: string): Promise<void>;
-  get(id: string, depth?: number): Promise<Bookmark>;
-  getChildren(id: string, depth?: number): Promise<Bookmark[]>;
+  get(id: string): Promise<Bookmark>;
+  getChildren(id: string): Promise<Bookmark[]>;
 }
