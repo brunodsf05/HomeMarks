@@ -105,6 +105,7 @@ export class BookmarkService implements IBookmarkService {
     const youngestFolderId: string = isYoungestFolder ? youngest.id : youngest.parentId!;
 
     // Start DFS
+    // TODO: Trim each bookmarks so it uses less memory
     return findPath(oldest, youngestFolderId) ?? [];
   }
 }
