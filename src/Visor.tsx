@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
-import { BookmarkComponent } from "@/components/common/bookmarks";
+import { BookmarkClickable } from "@/components/common/bookmarks";
 
 interface VisorProps {
   rootBookmark: Bookmark;
@@ -30,7 +30,7 @@ export const Visor: React.FC<VisorProps> = ({ rootBookmark }) => {
           path.map((b, idx) => (
             <>
               <div style={{ display: "inline-block" }}>
-                <BookmarkComponent bookmark={b} onClick={onBookmarkClickHandler} />
+                <BookmarkClickable bookmark={b} onClick={onBookmarkClickHandler} />
               </div>
               {idx < path.length - 1 && ' / '}
 
@@ -42,7 +42,7 @@ export const Visor: React.FC<VisorProps> = ({ rootBookmark }) => {
       <ul>
         {
           currentBookmark?.children?.map((b) =>
-            <li><BookmarkComponent bookmark={b} onClick={onBookmarkClickHandler} /></li>
+            <li><BookmarkClickable bookmark={b} onClick={onBookmarkClickHandler} /></li>
           )
         }
       </ul>
