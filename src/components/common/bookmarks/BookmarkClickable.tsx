@@ -15,6 +15,7 @@ export const BookmarkClickable: React.FC<BookmarkComponentProps> = ({ bookmark, 
           size={64}
           className={styles.favicon}
           onImageSourceUpdate={setFaviconSrc}
+          draggable={false}
         />
       </div>}
 
