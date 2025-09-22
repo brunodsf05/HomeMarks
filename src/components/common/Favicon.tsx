@@ -14,10 +14,16 @@ interface FaviconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
  */
 export const Favicon: React.FC<FaviconProps> = ({ url, size, ...rest }) => {
   const [faviconUrl, setFaviconUrl] = useState<string>(favicon.getUrlOnline(url, size));
+  const [isUsingFallback, setIsUsingFallback] = useState<boolean>(false);
 
-  const handleError = () => {
-    console.warn(`Favicon for ${url} not found online, switching to local favicon.`);
-    setFaviconUrl(favicon.getUrlLocally(url, size)); // TODO: Handle Firefox and local-favicon not found. Maybe the last ends in a loop?
+  const handleLoad: React.ReactEventHandler<HTMLImageElement> = (event) => {
+    if (isUsingFallback) return;
+
+    // Image search failed
+    if (event.currentTarget.naturalWidth < size) {
+      setFaviconUrl('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII'); // TODO: Load/generate it from somewhere
+      setIsUsingFallback(true);
+    }
   };
 
   return (
@@ -26,8 +32,8 @@ export const Favicon: React.FC<FaviconProps> = ({ url, size, ...rest }) => {
       alt="favicon"
       width={size}
       height={size}
+      onLoad={handleLoad}
       {...rest}
-      onError={handleError}
     />
   );
 };
