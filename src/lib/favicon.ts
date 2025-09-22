@@ -19,8 +19,8 @@ export const getUrlFromT2GStatic: FaviconGetter = (url: string, size: Sizes) =>
 export const getUrlOnline: FaviconGetter = (url: string, size: Sizes) =>
   getUrlFromT2GStatic(url, size);
 
-/**
- * Generates URL that can be used to fetch favicons locally without a connection.
- */
-export const getUrlLocally: FaviconGetter = (url: string, size: Sizes) =>
-  `chrome://favicon/size/${size}/${encode(url)}`;
+// /**
+//  * Generates URL that can be used to fetch favicons locally without a connection.
+//  */
+// export const getUrlLocally: FaviconGetter = (url: string, size: Sizes) =>
+//   `chrome://favicon/size/${size}/${url}`;
