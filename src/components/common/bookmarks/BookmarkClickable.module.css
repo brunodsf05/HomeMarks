@@ -2,6 +2,7 @@
   --favicon-size: 5rem;
   --radius: 1rem;
   --favicon-radius: 1.8rem;
+  --bezier-expo: cubic-bezier(0.5, 0, 0.5, 1);
 }
 
 .this {
@@ -9,9 +10,23 @@
   flex-direction: column;
   align-items: center;
   width: var(--favicon-size);
+  transition: scale 0.2s var(--bezier-expo);
   gap: 0.5rem;
   cursor: pointer;
+  user-select: none;
 }
+
+.title {
+  max-width: 100%;
+  margin: 0;
+  text-align: center;
+  text-overflow: ellipsis;
+  color: white;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Favicon display*/
 
 .faviconContainer {
   position: relative;
@@ -44,12 +59,14 @@
   object-fit: contain;
 }
 
-.title {
-  max-width: 100%;
-  margin: 0;
-  text-align: center;
-  text-overflow: ellipsis;
-  color: white;
-  overflow: hidden;
-  white-space: nowrap;
+/* Animations */
+.this:hover,
+.this:focus-visible {
+  transition: scale 0.2s var(--bezier-expo);
+  scale: 1.15;
+}
+
+.this:active {
+  transition: scale 0.05s var(--bezier-expo);
+  scale: 0.97;
 }
