@@ -42,7 +42,7 @@ export const Visor: React.FC<VisorProps> = ({ rootBookmark }) => {
       <ul>
         {
           currentBookmark?.children?.map((b) =>
-            <li><BookmarkClickable bookmark={b} onClick={onBookmarkClickHandler} /></li>
+            <li key={b.id}><BookmarkClickable bookmark={b} onClick={onBookmarkClickHandler} /></li>
           )
         }
       </ul>
