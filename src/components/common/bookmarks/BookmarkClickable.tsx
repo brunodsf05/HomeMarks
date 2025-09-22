@@ -6,8 +6,8 @@ import styles from './BookmarkClickable.module.css';
 export const BookmarkClickable: React.FC<BookmarkComponentProps> = ({ bookmark, onClick = onClickNotImplemented }) => {
   return (
     <div onClick={() => onClick(bookmark)} className={styles.this} >
-      {bookmark.url && <Favicon url={bookmark.url} size={32} />}
-      <p>{bookmark.title}</p>
+      {bookmark.url && <Favicon url={bookmark.url} size={64} className={styles.favicon} />}
+      <p className={styles.title}>{bookmark.title}</p>
     </div>
   );
 };

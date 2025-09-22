@@ -1,5 +1,28 @@
+:root {
+  --favicon-size: 5rem;
+}
+
 .this {
-  display: inline-flex;
   align-items: center;
-  gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  width: var(--favicon-size);
+  background-color: gray;
+}
+
+.favicon {
+  scale: 0.7;
+  width: var(--favicon-size);
+  height: var(--favicon-size);
+  background-color: black;
+
+}
+
+.title {
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0;
 }
