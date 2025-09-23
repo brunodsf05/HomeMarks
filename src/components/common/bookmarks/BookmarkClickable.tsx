@@ -10,44 +10,22 @@ export const BookmarkClickable: React.FC<BookmarkComponentProps> = ({ bookmark, 
     <div onClick={() => onClick(bookmark)} className={styles.this}>
       {
         isFolder
+          // Render folder's children
           ? <div className={styles.faviconFolder}>
-            <FaviconBox
-              url="https://www.google.com"
-              size={32}
-              draggable={false}
-              additionalClassNames={{
-                container: styles.faviconContainerMultiple,
-                icon: styles.faviconIconMultiple
-              }}
-            />
-            <FaviconBox
-              url="https://www.instagram.com"
-              size={32}
-              draggable={false}
-              additionalClassNames={{
-                container: styles.faviconContainerMultiple,
-                icon: styles.faviconIconMultiple
-              }}
-            />
-            <FaviconBox
-              url="https://www.linkedin.com"
-              size={32}
-              draggable={false}
-              additionalClassNames={{
-                container: styles.faviconContainerMultiple,
-                icon: styles.faviconIconMultiple
-              }}
-            />
-            <FaviconBox
-              url="https://www.github.com"
-              size={32}
-              draggable={false}
-              additionalClassNames={{
-                container: styles.faviconContainerMultiple,
-                icon: styles.faviconIconMultiple
-              }}
-            />
+            {
+              bookmark.children?.map((b) => <FaviconBox
+                id={`${bookmark.id}-${b.id}`}
+                url={b.url}
+                size={32}
+                draggable={false}
+                additionalClassNames={{
+                  container: styles.faviconContainerMultiple,
+                  icon: styles.faviconIconMultiple
+                }}
+              />)
+            }
           </div>
+          // Render website's favicon
           : <FaviconBox
             url={bookmark.url}
             size={64}
