@@ -8,6 +8,15 @@ interface FaviconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 }
 
 /**
+ * This checks if a favicon downloaded via `https://t2.gstatic.com/faviconV2`
+ */
+function isOnlineFaviconPlaceholder(img: HTMLImageElement, targetSize: favicon.Sizes): boolean {
+  const imgSize: number = img.naturalWidth;
+  console.log(`imgSize ${imgSize} targetSize ${targetSize}`);
+  return imgSize < targetSize && imgSize === favicon.sizePlaceholderT2GStatic;
+}
+
+/**
  * An image component that displays the favicon for a given URL.
  *
  * @param url The URL of the website to fetch the favicon for.
@@ -27,7 +36,7 @@ export const Favicon: React.FC<FaviconProps> = ({ url, size, onImageSourceUpdate
     if (isUsingFallback) return;
 
     // Image search failed
-    if (img.naturalWidth < size) {
+    if (isOnlineFaviconPlaceholder(img, size) && true) {
       setFaviconUrl('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII'); // TODO: Load/generate it from somewhere
       setIsUsingFallback(true);
     }
