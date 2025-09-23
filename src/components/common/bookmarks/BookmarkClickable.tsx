@@ -13,16 +13,20 @@ export const BookmarkClickable: React.FC<BookmarkComponentProps> = ({ bookmark, 
           // Render folder's children
           ? <div className={styles.faviconFolder}>
             {
-              bookmark.children?.map((b) => <FaviconBox
-                id={`${bookmark.id}-${b.id}`}
-                url={b.url}
-                size={32}
-                draggable={false}
-                additionalClassNames={{
-                  container: styles.faviconContainerMultiple,
-                  icon: styles.faviconIconMultiple
-                }}
-              />)
+              bookmark.children?.map((b) => {
+                return (
+                  <FaviconBox
+                    id={`${bookmark.id}-${b.id}`}
+                    url={b.url}
+                    size={16}
+                    draggable={false}
+                    additionalClassNames={{
+                      container: styles.faviconContainerMultiple,
+                      icon: styles.faviconIconMultiple
+                    }}
+                  />
+                );
+              })
             }
           </div>
           // Render website's favicon
