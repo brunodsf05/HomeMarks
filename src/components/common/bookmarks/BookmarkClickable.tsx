@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Favicon } from '@/components/common/Favicon';
+import { Favicon } from '@/components/common/favicon';
 import { type BookmarkComponentProps, onClickNotImplemented } from './common';
 import styles from './BookmarkClickable.module.css';
 
