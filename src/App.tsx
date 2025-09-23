@@ -1,11 +1,18 @@
 import { useState, useEffect } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { Visor } from "@/Visor";
+import { exampleBookmark } from "./globals.d"; // TODO: Remove
 
 const App = () => {
   const [bookmarks, setBookmarks] = useState<Bookmark>();
 
   useEffect(() => {
+    // TODO: Remove this "if" and keep "else", just for testing
+    if (import.meta.env.DEV) {
+      setBookmarks(exampleBookmark);
+      return;
+    }
+
     BookmarkService.getInstance()
       .getWellKnown("bar")
       .then((b) => setBookmarks(b))
