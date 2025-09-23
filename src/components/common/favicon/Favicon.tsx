@@ -1,11 +1,6 @@
 import { useState } from "react";
 import * as favicon from "@/lib/favicon";
-
-interface FaviconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  url: string;
-  size: favicon.Sizes;
-  onImageSourceUpdate?: (src: string) => void;
-}
+import { type FaviconProps } from "./_types";
 
 /**
  * This checks if a favicon downloaded via `https://t2.gstatic.com/faviconV2`
