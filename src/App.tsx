@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
-import { Visor } from "@/Visor";
+import { BookmarkExplorer } from "@/components/common/bookmarks";
 import { exampleBookmark } from "./globals.d"; // TODO: Remove
 
 const App = () => {
@@ -26,7 +26,7 @@ const App = () => {
       {
         bookmarks === undefined
           ? <p>Loading...</p>
-          : <Visor rootBookmark={bookmarks} />
+          : <BookmarkExplorer rootBookmark={bookmarks} />
       }
     </>
   );
