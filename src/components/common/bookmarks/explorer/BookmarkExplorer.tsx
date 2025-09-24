@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
-import { BookmarkClickable } from "./BookmarkClickable";
-import { type BookmarkComponentProps, onClickNotImplemented } from "./common";
+import { BookmarkClickable } from "../BookmarkClickable";
+import { type BookmarkComponentProps, onClickNotImplemented } from "../common";
 import styles from "./BookmarkExplorer.module.css";
 
 // --- BookmarkExplorerPathLeaf ---
@@ -45,7 +45,7 @@ export const BookmarkExplorer: React.FC<BookmarkExplorerProps> = ({ rootBookmark
       <ul>
         {
           currentBookmark?.children?.map((b) =>
-            <li key={b.id}><BookmarkClickable key={b.id} bookmark={b} onClick={onBookmarkClickHandler} /></li>
+            <li><BookmarkClickable key={b.id} bookmark={b} onClick={onBookmarkClickHandler} /></li>
           )
         }
       </ul>

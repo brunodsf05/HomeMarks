@@ -9,6 +9,7 @@
   color: white;
   cursor: default;
   gap: var(--gap);
+  overflow: auto;
 }
 
 .leaf {
