@@ -6,7 +6,7 @@ interface VisorProps {
   rootBookmark: Bookmark;
 }
 
-export const Visor: React.FC<VisorProps> = ({ rootBookmark }) => {
+export const BookmarkExplorer: React.FC<VisorProps> = ({ rootBookmark }) => {
   const [currentBookmark, setCurrentBookmark] = useState<Bookmark>(rootBookmark);
   const path: Bookmark[] = BookmarkService.getInstance().getFolderRange(rootBookmark, currentBookmark);
 
@@ -20,8 +20,6 @@ export const Visor: React.FC<VisorProps> = ({ rootBookmark }) => {
       window.open(b.url, '_self');
     }
   };
-
-
 
   return (
     <div>
