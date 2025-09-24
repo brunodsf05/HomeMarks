@@ -1,12 +1,22 @@
 import { useState } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
-import { BookmarkClickable } from "@/components/common/bookmarks";
+import { BookmarkClickable } from "./BookmarkClickable";
+import { type BookmarkComponentProps, onClickNotImplemented } from "./common";
+import styles from "./BookmarkExplorer.module.css";
 
-interface VisorProps {
+// --- BookmarkExplorerPathLeaf ---
+const BookmarkExplorerPathLeaf: React.FC<BookmarkComponentProps> = ({ bookmark, onClick = onClickNotImplemented }) => (
+  <div onClick={() => onClick && onClick(bookmark)} className={styles.leaf}>
+    {bookmark.title ?? "Folder"}
+  </div>
+);
+
+// --- BookmarkExplorer ---
+interface BookmarkExplorerProps {
   rootBookmark: Bookmark;
 }
 
-export const BookmarkExplorer: React.FC<VisorProps> = ({ rootBookmark }) => {
+export const BookmarkExplorer: React.FC<BookmarkExplorerProps> = ({ rootBookmark }) => {
   const [currentBookmark, setCurrentBookmark] = useState<Bookmark>(rootBookmark);
   const path: Bookmark[] = BookmarkService.getInstance().getFolderRange(rootBookmark, currentBookmark);
 
@@ -17,22 +27,17 @@ export const BookmarkExplorer: React.FC<VisorProps> = ({ rootBookmark }) => {
       setCurrentBookmark(b);
     }
     else {
-      window.open(b.url, '_self');
+      window.open(b.url, "_self");
     }
   };
 
   return (
     <div>
-      <div >
+      {/* BookmarkExplorerPathBar */}
+      <div className={styles.path}>
         {
           path.map((b, idx) => (
-            <>
-              <div style={{ display: "inline-block" }}>
-                <BookmarkClickable bookmark={b} onClick={onBookmarkClickHandler} />
-              </div>
-              {idx < path.length - 1 && ' / '}
-
-            </>
+            <BookmarkExplorerPathLeaf key={idx} bookmark={b} onClick={onBookmarkClickHandler} />
           ))
         }
       </div>
@@ -40,10 +45,10 @@ export const BookmarkExplorer: React.FC<VisorProps> = ({ rootBookmark }) => {
       <ul>
         {
           currentBookmark?.children?.map((b) =>
-            <li key={b.id}><BookmarkClickable bookmark={b} onClick={onBookmarkClickHandler} /></li>
+            <li key={b.id}><BookmarkClickable key={b.id} bookmark={b} onClick={onBookmarkClickHandler} /></li>
           )
         }
       </ul>
-    </div>
+    </div >
   );
 };

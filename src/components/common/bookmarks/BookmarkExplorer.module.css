@@ -1,0 +1,22 @@
+:root {
+  --gap: 1rem;
+}
+
+.path {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid white;
+  color: white;
+  cursor: default;
+  gap: var(--gap);
+}
+
+.leaf {
+  color: white;
+  cursor: pointer;
+}
+
+.leaf + .leaf::before {
+  content: '►';
+  margin-right: var(--gap);
+}
