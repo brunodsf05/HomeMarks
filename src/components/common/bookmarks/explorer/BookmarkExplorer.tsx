@@ -1,46 +1,37 @@
 import { useState } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { BookmarkClickable } from "../BookmarkClickable";
-import { type BookmarkComponentProps, onClickNotImplemented } from "../common";
-import styles from "./BookmarkExplorer.module.css";
+import { PathBar } from "./_PathBar";
 
-// --- BookmarkExplorerPathLeaf ---
-const BookmarkExplorerPathLeaf: React.FC<BookmarkComponentProps> = ({ bookmark, onClick = onClickNotImplemented }) => (
-  <div onClick={() => onClick && onClick(bookmark)} className={styles.leaf}>
-    {bookmark.title ?? "Folder"}
-  </div>
-);
-
-// --- BookmarkExplorer ---
 interface BookmarkExplorerProps {
   rootBookmark: Bookmark;
 }
 
 export const BookmarkExplorer: React.FC<BookmarkExplorerProps> = ({ rootBookmark }) => {
   const [currentBookmark, setCurrentBookmark] = useState<Bookmark>(rootBookmark);
-  const path: Bookmark[] = BookmarkService.getInstance().getFolderRange(rootBookmark, currentBookmark);
+
+  // Handlers
+  const onBookmarkFolderClickHandler = (b: Bookmark) => {
+    setCurrentBookmark(b);
+  };
+
+  const onBookmarkUrlClickHandler = (b: Bookmark) => {
+    window.open(b.url, "_self");
+  };
 
   const onBookmarkClickHandler = (b: Bookmark) => {
     const isFolder = BookmarkService.getInstance().isFolder(b);
-
-    if (isFolder) {
-      setCurrentBookmark(b);
-    }
-    else {
-      window.open(b.url, "_self");
-    }
+    (isFolder ? onBookmarkFolderClickHandler : onBookmarkUrlClickHandler)(b);
   };
 
+  // Render
   return (
     <div>
-      {/* BookmarkExplorerPathBar */}
-      <div className={styles.path}>
-        {
-          path.map((b, idx) => (
-            <BookmarkExplorerPathLeaf key={idx} bookmark={b} onClick={onBookmarkClickHandler} />
-          ))
-        }
-      </div>
+      <PathBar
+        rootBookmark={rootBookmark}
+        currentBookmark={currentBookmark}
+        onFolderClick={onBookmarkFolderClickHandler}
+      />
       <hr />
       <ul>
         {
