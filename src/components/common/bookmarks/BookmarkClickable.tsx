@@ -16,7 +16,7 @@ export const BookmarkClickable: React.FC<BookmarkComponentProps> = ({ bookmark, 
               bookmark.children?.map((b) => {
                 return (
                   <FaviconBox
-                    id={`${bookmark.id}-${b.id}`}
+                    key={`${b.id}`}
                     url={b.url}
                     size={16}
                     draggable={false}
