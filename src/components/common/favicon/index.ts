@@ -1,2 +1,2 @@
-export { Favicon } from './Favicon';
-export { FaviconBox } from './FaviconBox';
+export { Favicon } from "./Favicon";
+export { FaviconBox } from "./FaviconBox";

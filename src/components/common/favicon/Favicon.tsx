@@ -32,7 +32,7 @@ export const Favicon: React.FC<FaviconProps> = ({ url, size, onImageSourceUpdate
 
     // Image search failed
     if (isOnlineFaviconPlaceholder(img, size) && true) {
-      setFaviconUrl('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII'); // TODO: Load/generate it from somewhere
+      setFaviconUrl("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII"); // TODO: Load/generate it from somewhere
       setIsUsingFallback(true);
     }
   };

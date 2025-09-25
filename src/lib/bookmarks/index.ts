@@ -1,2 +1,2 @@
-export type { Bookmark } from './types';
-export { BookmarkService } from './service';
+export type { Bookmark } from "./types";
+export { BookmarkService } from "./service";

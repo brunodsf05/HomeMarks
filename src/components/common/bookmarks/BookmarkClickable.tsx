@@ -1,7 +1,7 @@
-import { FaviconBox } from '@/components/common/favicon';
-import { BookmarkService } from '@/lib/bookmarks';
-import { type BookmarkComponentProps, onClickNotImplemented } from './common';
-import styles from './BookmarkClickable.module.css';
+import { FaviconBox } from "@/components/common/favicon";
+import { BookmarkService } from "@/lib/bookmarks";
+import { type BookmarkComponentProps, onClickNotImplemented } from "./common";
+import styles from "./BookmarkClickable.module.css";
 
 export const BookmarkClickable: React.FC<BookmarkComponentProps> = ({ bookmark, onClick = onClickNotImplemented }) => {
   const isFolder: boolean = BookmarkService.getInstance().isFolder(bookmark);
