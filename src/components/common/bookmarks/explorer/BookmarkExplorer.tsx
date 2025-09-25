@@ -8,8 +8,11 @@ interface BookmarkExplorerProps {
   rootBookmark: Bookmark;
 }
 
+const CLICK_DELAY = 150; // ms
+
 export const BookmarkExplorer: React.FC<BookmarkExplorerProps> = ({ rootBookmark }) => {
   const [currentBookmark, setCurrentBookmark] = useState<Bookmark>(rootBookmark);
+  const [hasClicked, setHasClicked] = useState<boolean>(false);
 
   // Handlers
   const onBookmarkFolderClickHandler = (b: Bookmark) => {
@@ -21,8 +24,16 @@ export const BookmarkExplorer: React.FC<BookmarkExplorerProps> = ({ rootBookmark
   };
 
   const onBookmarkClickHandler = (b: Bookmark) => {
-    const isFolder = BookmarkService.getInstance().isFolder(b);
-    (isFolder ? onBookmarkFolderClickHandler : onBookmarkUrlClickHandler)(b);
+    if (hasClicked) return;
+
+    const executeWithDelay = async () => {
+      await new Promise(resolve => setTimeout(resolve, CLICK_DELAY));
+
+      const isFolder = BookmarkService.getInstance().isFolder(b);
+      (isFolder ? onBookmarkFolderClickHandler : onBookmarkUrlClickHandler)(b);
+    };
+
+    executeWithDelay();
   };
 
   // Render
