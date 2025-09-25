@@ -32,11 +32,16 @@ export const BookmarkExplorer: React.FC<BookmarkExplorerProps> = ({ rootBookmark
         currentBookmark={currentBookmark}
         onFolderClick={onBookmarkFolderClickHandler}
       />
-      <hr />
       <ul>
         {
           currentBookmark?.children?.map((b) =>
-            <li><BookmarkClickable key={b.id} bookmark={b} onClick={onBookmarkClickHandler} /></li>
+            <li>
+              <BookmarkClickable
+                key={b.id}
+                bookmark={b}
+                onClick={onBookmarkClickHandler}
+              />
+            </li>
           )
         }
       </ul>
