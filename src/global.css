@@ -1,0 +1,19 @@
+:root {
+  --color-bg: #000;
+  --color-text: #eee;
+
+  --material-bg: linear-gradient(0deg, var(--color-bg) 0%, #222 100%);
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background: var(--color-bg);
+  background: var(--material-bg);
+}
+
+* {
+  color: var(--color-text);
+}
