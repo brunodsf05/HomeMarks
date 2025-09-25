@@ -1,10 +1,31 @@
+/* Variables */
 :root {
   --color-bg: #000;
   --color-text: #eee;
 
   --material-bg: linear-gradient(0deg, var(--color-bg) 0%, #222 100%);
+
+  --font-text: dm-sans, Arial, Helvetica, sans-serif;
 }
 
+/* Fonts */
+@font-face {
+  font-family: dm-sans;
+  src: url("./assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: dm-sans;
+  src: url("./assets/fonts/DM_Sans/DMSans-Italic-VariableFont_opsz,wght.ttf");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Styling */
 body {
   display: flex;
   min-height: 100vh;
@@ -16,4 +37,5 @@ body {
 
 * {
   color: var(--color-text);
+  font-family: var(--font-text);
 }
