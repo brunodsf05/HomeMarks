@@ -2,6 +2,7 @@ import { useState } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { BookmarkClickable } from "../BookmarkClickable";
 import { PathBar } from "./_PathBar";
+import styles from "./styles.module.css";
 
 interface BookmarkExplorerProps {
   rootBookmark: Bookmark;
@@ -26,25 +27,23 @@ export const BookmarkExplorer: React.FC<BookmarkExplorerProps> = ({ rootBookmark
 
   // Render
   return (
-    <div>
+    <div className={styles.this}>
       <PathBar
         rootBookmark={rootBookmark}
         currentBookmark={currentBookmark}
         onFolderClick={onBookmarkFolderClickHandler}
       />
-      <ul>
+      <div className={styles.clickableContainer}>
         {
           currentBookmark?.children?.map((b) =>
-            <li>
-              <BookmarkClickable
-                key={b.id}
-                bookmark={b}
-                onClick={onBookmarkClickHandler}
-              />
-            </li>
+            <BookmarkClickable
+              key={b.id}
+              bookmark={b}
+              onClick={onBookmarkClickHandler}
+            />
           )
         }
-      </ul>
-    </div >
+      </div>
+    </div>
   );
 };
