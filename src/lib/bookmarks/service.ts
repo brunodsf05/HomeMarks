@@ -1,5 +1,5 @@
-import browser from '@/lib/browser_api';
-import type { Bookmark, IBookmarkService, WellKnownFolders } from './types';
+import browser from "@/lib/browser_api";
+import type { Bookmark, IBookmarkService, WellKnownFolders } from "./types";
 
 /**
  * Singleton service to manage bookmarks. Attempts to abstract the underlying browser API for both

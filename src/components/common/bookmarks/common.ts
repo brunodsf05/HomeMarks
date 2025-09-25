@@ -1,4 +1,4 @@
-import type { Bookmark } from '@/lib/bookmarks';
+import type { Bookmark } from "@/lib/bookmarks";
 
 export type BookmarkComponentProps = {
   bookmark: Bookmark;

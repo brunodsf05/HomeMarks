@@ -1,4 +1,4 @@
-declare const __BROWSER__: 'chrome' | 'firefox';
+declare const __BROWSER__: "chrome" | "firefox";
 
 // TODO: Temporal mockup data
 import { type Bookmark } from "@/lib/bookmarks";

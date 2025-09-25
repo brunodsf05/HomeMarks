@@ -1,6 +1,6 @@
 const glb = (globalThis as any);
 const isChrome = glb.chrome !== undefined;
-const api = glb[isChrome ? 'chrome' : 'browser'];
+const api = glb[isChrome ? "chrome" : "browser"];
 
 /**
  * Unified browser API access for Chrome and Firefox.
