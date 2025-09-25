@@ -26,7 +26,6 @@
   margin: 0;
   text-align: center;
   text-overflow: ellipsis;
-  color: white;
   overflow: hidden;
   white-space: nowrap;
 }
