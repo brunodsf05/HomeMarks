@@ -2,6 +2,14 @@
   --gap: 1rem;
 }
 
+/* Whole explorer */
+.this {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+/* Path bar */
 .pathBar {
   display: flex;
   flex-direction: row;
@@ -20,4 +28,12 @@
 .pathLeaf + .pathLeaf::before {
   content: '►';
   margin-right: var(--gap);
+}
+
+/* Clickables */
+.clickableContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: var(--gap);
 }
