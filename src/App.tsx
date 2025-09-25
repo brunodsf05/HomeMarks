@@ -3,9 +3,35 @@ import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { BookmarkExplorer } from "@/components/common/bookmarks";
 import { exampleBookmark } from "./globals.d"; // TODO: Remove
 
+interface SearchResultProps {
+  bookmarks?: Bookmark,
+  query: string;
+}
+
+const SearchResult: React.FC<SearchResultProps> = ({ bookmarks, query }) => {
+  if (!bookmarks) return <></>;
+
+  const explorers: Bookmark[] = [bookmarks,];
+
+  return (
+    <>
+      {
+        query.length > 0 && <p>DEBUG: Wants to search</p>
+      }
+      {
+        explorers.map((b, i) =>
+          <BookmarkExplorer key={i} rootBookmark={bookmarks} />
+        )
+      }
+    </>
+  );
+};
+
 const App = () => {
   const [bookmarks, setBookmarks] = useState<Bookmark>();
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
+  // Load users bookmarks
   useEffect(() => {
     // TODO: Remove this "if" and keep "else", just for testing
     if (import.meta.env.DEV) {
@@ -19,15 +45,13 @@ const App = () => {
       .catch(console.error);
   }, []);
 
-  // TODO: Remove this, just for testing
   return (
     <>
       <h1>Bookmarks</h1>
-      {
-        bookmarks === undefined
-          ? <p>Loading...</p>
-          : <BookmarkExplorer rootBookmark={bookmarks} />
-      }
+      <input type="search" placeholder="Search..." onChange={(e) => setSearchQuery(e.target.value.trim())} />
+      <div id="search">
+        <SearchResult bookmarks={bookmarks} query={searchQuery} />
+      </div>
     </>
   );
 };
