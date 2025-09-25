@@ -2,7 +2,7 @@
   --gap: 1rem;
 }
 
-.path {
+.pathBar {
   display: flex;
   flex-direction: row;
   border: 1px solid white;
@@ -12,12 +12,12 @@
   overflow: auto;
 }
 
-.leaf {
+.pathLeaf {
   color: white;
   cursor: pointer;
 }
 
-.leaf + .leaf::before {
+.pathLeaf + .pathLeaf::before {
   content: '►';
   margin-right: var(--gap);
 }
