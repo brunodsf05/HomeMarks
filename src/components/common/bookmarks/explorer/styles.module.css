@@ -14,14 +14,12 @@
   display: flex;
   flex-direction: row;
   border: 1px solid white;
-  color: white;
   cursor: default;
   gap: var(--gap);
   overflow: auto;
 }
 
 .pathLeaf {
-  color: white;
   cursor: pointer;
 }
 
