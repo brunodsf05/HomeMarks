@@ -29,7 +29,7 @@ export const PathBar: React.FC<PathBarProps> = ({ rootBookmark, currentBookmark,
   }, []);
 
   return (
-    <div ref={barRef} className={styles.path}>
+    <div ref={barRef} className={styles.pathBar}>
       {
         path.map((b, idx) => (
           <Leaf key={idx} bookmark={b} onClick={onFolderClick} />
