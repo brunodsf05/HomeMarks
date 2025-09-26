@@ -39,7 +39,6 @@ body {
   background-size: cover;
   background: var(--color-bg);
   background: var(--material-bg);
-  background: var(--material-bg);
   font-size: 1.2rem;
   margin: auto;
   width: min(100rem, 100vw);
