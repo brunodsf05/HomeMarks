@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
+import { WebSearchService } from "@/lib/websearch";
 import { BookmarkExplorer } from "@/components/common/bookmarks";
 import { exampleBookmark } from "@/globals.d"; // TODO: Remove
 import styles from "./App.module.css";
@@ -53,6 +54,11 @@ const App = () => {
         type="search"
         placeholder="Search..."
         onChange={(e) => setSearchQuery(e.target.value.trim())}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            WebSearchService.getInstance().search(searchQuery);
+          }
+        }}
         className={styles.searchBar}
       />
       <div id="search" className={styles.searchResults}>
