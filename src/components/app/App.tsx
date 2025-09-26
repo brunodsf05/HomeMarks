@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { BookmarkExplorer } from "@/components/common/bookmarks";
 import { exampleBookmark } from "@/globals.d"; // TODO: Remove
+import styles from "./App.module.css";
 
 interface SearchResultProps {
   bookmarks?: Bookmark,
@@ -49,7 +50,7 @@ const App = () => {
     <>
       <h1>Bookmarks</h1>
       <input type="search" placeholder="Search..." onChange={(e) => setSearchQuery(e.target.value.trim())} />
-      <div id="search">
+      <div id="search" className={styles.search}>
         <SearchResult bookmarks={bookmarks} query={searchQuery} />
       </div>
     </>
