@@ -12,7 +12,7 @@ interface SearchResultProps {
 const SearchResult: React.FC<SearchResultProps> = ({ bookmarks, query }) => {
   if (!bookmarks) return <></>;
 
-  const explorers: Bookmark[] = [bookmarks,];
+  const explorers: Bookmark[] = [bookmarks];
 
   return (
     <>
@@ -21,7 +21,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ bookmarks, query }) => {
       }
       {
         explorers.map((b, i) =>
-          <BookmarkExplorer key={i} rootBookmark={bookmarks} />
+          <BookmarkExplorer key={i} rootBookmark={b} />
         )
       }
     </>
