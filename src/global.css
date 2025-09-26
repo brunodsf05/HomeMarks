@@ -38,9 +38,16 @@ body {
   background-size: cover;
   background: var(--color-bg);
   background: var(--material-bg);
+  background: var(--material-bg);
+  margin: auto;
+  width: min(100rem, 100vw);
+
+  & > * {
+    width: 100%;
+  }
 }
 
 * {
-  color: var(--color-text);
   font-family: var(--font-text);
+  color: var(--color-text);
 }
