@@ -1,9 +1,9 @@
 :root {
-  --favicon-size: 5rem;
+  --favicon-size: 8rem;
   --folder-cols: 2;
   --favicon-size-small: calc(var(--favicon-size) / var(--folder-cols));
-  --border: 0.08rem;
-  --radius: 1rem;
+  --border: 0.1rem;
+  --radius: 2rem;
   --favicon-radius: 1rem;
   --favicon-radius-small: 0.5rem;
   --bezier-expo: cubic-bezier(0.5, 0, 0.5, 1);
