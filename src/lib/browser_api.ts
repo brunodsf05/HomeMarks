@@ -12,6 +12,7 @@ interface BrowserApi {
   api: {
     all: typeof chrome;
     bookmarks: typeof chrome.bookmarks;
+    search: typeof chrome.search;
   };
 }
 
@@ -19,7 +20,8 @@ const browserApi: BrowserApi = {
   isChrome: isChrome,
   api: {
     all: api,
-    bookmarks: api.bookmarks
+    bookmarks: api.bookmarks,
+    search: api.search,
   }
 };
 
