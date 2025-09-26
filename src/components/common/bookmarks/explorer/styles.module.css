@@ -1,26 +1,44 @@
 :root {
-  --gap: 1.5rem;
+  --gap: 1rem;
 }
 
 /* Whole explorer */
 .this {
   display: flex;
   flex-direction: column;
+  padding: var(--gap);
+  border: var(--style-border);
+  border-radius: var(--gap);
+  background: var(--material-panel);
   gap: var(--gap);
+  box-sizing: border-box;
 }
 
 /* Path bar */
 .pathBar {
   display: flex;
   flex-direction: row;
-  border: 1px solid white;
+  border: var(--style-border);
+  border-radius: 0.5rem;
+  background: var(--color-clickable);
   cursor: default;
-  gap: var(--gap);
   overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) transparent;
 }
 
 .pathLeaf {
+  border-radius: 0.5rem;
   cursor: pointer;
+  user-select: none;
+}
+
+.pathLeaf {
+  padding: 0.5rem 0.5rem;
+}
+
+.pathLeaf:hover {
+  background: #fff4;
 }
 
 .pathLeaf + .pathLeaf::before {
