@@ -7,7 +7,6 @@ import { type FaviconProps } from "./_types";
  */
 function isOnlineFaviconPlaceholder(img: HTMLImageElement, targetSize: favicon.Sizes): boolean {
   const imgSize: number = img.naturalWidth;
-  console.log(`imgSize ${imgSize} targetSize ${targetSize}`);
   return imgSize < targetSize && imgSize === favicon.sizePlaceholderT2GStatic;
 }
 
