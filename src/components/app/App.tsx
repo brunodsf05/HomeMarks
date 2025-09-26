@@ -47,13 +47,18 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <main className={styles.this}>
       <h1>Bookmarks</h1>
-      <input type="search" placeholder="Search..." onChange={(e) => setSearchQuery(e.target.value.trim())} />
-      <div id="search" className={styles.search}>
+      <input
+        type="search"
+        placeholder="Search..."
+        onChange={(e) => setSearchQuery(e.target.value.trim())}
+        className={styles.searchBar}
+      />
+      <div id="search" className={styles.searchResults}>
         <SearchResult bookmarks={bookmarks} query={searchQuery} />
       </div>
-    </>
+    </main>
   );
 };
 

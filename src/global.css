@@ -1,11 +1,19 @@
 /* Variables */
 :root {
   --color-bg: #000;
+  --color-panel: #111;
+  --color-clickable: #444;
+  --color-border: #555;
   --color-text: #eee;
 
-  --material-bg: linear-gradient(0deg, var(--color-bg) 0%, #222 100%);
+  --material-bg: linear-gradient(0deg, var(--color-bg) 0%, #111 100%);
+  --material-panel: linear-gradient(0deg, var(--color-panel) 0%, #333 100%);
 
   --font-text: dm-sans, Arial, Helvetica, sans-serif;
+
+  --style-border: 0.1rem solid var(--color-border);
+  --style-border-input: 0.1rem solid var(--color-bg);
+  --style-shadow-floating: 0 0 0.5rem black;
 }
 
 /* Fonts */
@@ -41,7 +49,7 @@ body {
   background: var(--material-bg);
   font-size: 1.2rem;
   margin: auto;
-  width: min(100rem, 100vw);
+  width: min(60rem, 100%);
 
   & > * {
     width: 100%;
