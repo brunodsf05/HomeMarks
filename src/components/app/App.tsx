@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { BookmarkExplorer } from "@/components/common/bookmarks";
-import { exampleBookmark } from "./globals.d"; // TODO: Remove
+import { exampleBookmark } from "@/globals.d"; // TODO: Remove
 
 interface SearchResultProps {
   bookmarks?: Bookmark,
