@@ -4,7 +4,7 @@
   "version": "0",
   "description": "A bookmarks launcher/manager.",
   "permissions": [
-    "storage",
+    "search",
     "bookmarks"
   ],
   "chrome_url_overrides": {
