@@ -1,0 +1,1 @@
+export { WebSearchService } from "./service";
