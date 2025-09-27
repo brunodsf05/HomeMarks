@@ -3,6 +3,7 @@ import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { WebSearchService } from "@/lib/websearch";
 import { BookmarkExplorer } from "@/components/common/bookmarks";
 import { exampleBookmark } from "@/globals.d"; // TODO: Remove
+import { DelayedInput } from "./_DelayedInput";
 import styles from "./App.module.css";
 
 interface SearchResultProps {
@@ -32,6 +33,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ bookmarks, query }) => {
 const App = () => {
   const [bookmarks, setBookmarks] = useState<Bookmark>();
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQueryDelayed, setSearchQueryDelayed] = useState<string>("");
 
   // Load users bookmarks
   useEffect(() => {
@@ -50,10 +52,18 @@ const App = () => {
   return (
     <main className={styles.this}>
       <h1>Bookmarks</h1>
-      <input
+      <DelayedInput
+        onInstantChange={
+          (line) => {
+            setSearchQuery(line);
+            if (line === "")
+              setSearchQueryDelayed("");
+          }
+        }
+        onDelayedChange={(line) => setSearchQueryDelayed(line)}
+        delayChangeMs={500}
         type="search"
         placeholder="Search..."
-        onChange={(e) => setSearchQuery(e.target.value.trim())}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             WebSearchService.getInstance().search(searchQuery);
@@ -62,7 +72,7 @@ const App = () => {
         className={styles.searchBar}
       />
       <div id="search" className={styles.searchResults}>
-        <SearchResult bookmarks={bookmarks} query={searchQuery} />
+        <SearchResult bookmarks={bookmarks} query={searchQueryDelayed} />
       </div>
     </main>
   );
