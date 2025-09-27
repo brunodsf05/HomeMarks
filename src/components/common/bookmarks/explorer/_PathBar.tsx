@@ -3,6 +3,10 @@ import { BookmarkService, type Bookmark } from "@/lib/bookmarks";
 import { Leaf } from "./_PathLeaf";
 import styles from "./styles.module.css";
 
+const Separator: React.FC = () => (
+  <div>►</div>
+);
+
 interface PathBarProps {
   rootBookmark: Bookmark;
   currentBookmark: Bookmark;
@@ -32,7 +36,10 @@ export const PathBar: React.FC<PathBarProps> = ({ rootBookmark, currentBookmark,
     <div ref={barRef} className={styles.pathBar}>
       {
         path.map((b, idx) => (
-          <Leaf key={idx} bookmark={b} onClick={onFolderClick} />
+          <>
+            {idx !== 0 && <Separator />}
+            <Leaf key={idx} bookmark={b} onClick={onFolderClick} />
+          </>
         ))
       }
     </div>

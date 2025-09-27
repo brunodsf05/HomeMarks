@@ -18,6 +18,7 @@
 .pathBar {
   display: flex;
   flex-direction: row;
+  align-items: center;
   border: var(--style-border);
   border-radius: 0.5rem;
   background: var(--color-clickable);
@@ -39,11 +40,6 @@
 
 .pathLeaf:hover {
   background: #fff4;
-}
-
-.pathLeaf + .pathLeaf::before {
-  content: '►';
-  margin-right: var(--gap);
 }
 
 /* Clickables */
