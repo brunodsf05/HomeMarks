@@ -65,8 +65,15 @@ const App = () => {
         type="search"
         placeholder="Search..."
         onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            WebSearchService.getInstance().search(searchQuery);
+          switch (e.key) {
+            case "Enter":
+              WebSearchService.getInstance().search(searchQuery);
+              break;
+
+            case "Tab":
+              e.preventDefault();
+              alert("Tab key pressed"); // TODO: Remove this test
+              break;
           }
         }}
         className={styles.searchBar}
