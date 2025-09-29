@@ -80,13 +80,12 @@ const App = () => {
         }}
         className={styles.searchBar}
       />
-      <KeyboardHints context={keyboardHints} />
       <div id="search" className={styles.searchResults}>
-        {/* TODO: Make this hints appear dynamically and maybe move it to the bottom */}
         <SearchResult bookmarks={bookmarks} query={searchQueryDelayed} />
       </div>
+      <KeyboardHints context={keyboardHints} className={styles.keyboardHints} />
     </main>
   );
 };
 
-export default App;
+export default App;;
