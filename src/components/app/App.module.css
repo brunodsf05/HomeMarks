@@ -19,7 +19,3 @@
   flex-direction: column;
   gap: 0.5rem;
 }
-
-.searchResults > * {
-  box-shadow: var(--style-shadow-floating);
-}
