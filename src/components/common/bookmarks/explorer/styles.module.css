@@ -6,12 +6,7 @@
 .this {
   display: flex;
   flex-direction: column;
-  padding: var(--gap);
-  border: var(--style-border);
-  border-radius: var(--gap);
-  background: var(--material-panel);
   gap: var(--gap);
-  box-sizing: border-box;
 }
 
 /* Path bar */

@@ -38,7 +38,7 @@ export const BookmarkExplorer: React.FC<BookmarkExplorerProps> = ({ rootBookmark
 
   // Render
   return (
-    <div className={styles.this}>
+    <div className={`${styles.this} panel`}>
       <PathBar
         rootBookmark={rootBookmark}
         currentBookmark={currentBookmark}

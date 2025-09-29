@@ -33,6 +33,15 @@
   font-display: swap;
 }
 
+/* Common */
+.panel {
+  padding: var(--gap);
+  border: var(--style-border);
+  border-radius: var(--gap);
+  background: var(--material-panel);
+  box-shadow: var(--style-shadow-floating);
+}
+
 /* Sizing */
 html {
   /* 1rem = 16px -> 10px */
