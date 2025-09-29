@@ -69,3 +69,23 @@ body {
   font-family: var(--font-text);
   color: var(--color-text);
 }
+
+kbd {
+  --color-outer-border: var(--color-border);
+  --color-inner-border: var(--color-bg);
+  --color-background: var(--color-clickable);
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  padding-bottom: 0.5rem;
+  border: var(--style-border-input);
+  border-radius: 0.4rem;
+  background: var(--color-background);
+  font-weight: lighter;
+  color: var(--color-text);
+  box-shadow:
+    0 -0.2rem 0.25rem var(--color-inner-border) inset,
+    0 0 0 0.1rem var(--color-outer-border);
+  user-select: none;
+  line-height: 1;
+  white-space: nowrap;
+}
