@@ -63,7 +63,7 @@ const App = () => {
         onDelayedChange={(line) => setSearchQueryDelayed(line)}
         delayChangeMs={500}
         type="search"
-        placeholder="Search..."
+        placeholder="Search the web or filter bookmarks by name or url..."
         onKeyDown={(e) => {
           switch (e.key) {
             case "Enter":
@@ -79,6 +79,11 @@ const App = () => {
         className={styles.searchBar}
       />
       <div id="search" className={styles.searchResults}>
+        {/* TODO: Make this hints appear dynamically and maybe move it to the bottom */}
+        <p>
+          <kbd>Tab</kbd> to focus on bookmarks.
+          <kbd>Enter</kbd> to search the web.
+        </p>
         <SearchResult bookmarks={bookmarks} query={searchQueryDelayed} />
       </div>
     </main>
