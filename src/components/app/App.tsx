@@ -4,6 +4,7 @@ import { WebSearchService } from "@/lib/websearch";
 import { BookmarkExplorer } from "@/components/common/bookmarks";
 import { exampleBookmark } from "@/globals.d"; // TODO: Remove
 import { DelayedInput } from "./_DelayedInput";
+import { KeyboardHints, type KeyboardHintsContext } from "./_KeyboardHints";
 import styles from "./App.module.css";
 
 interface SearchResultProps {
@@ -34,6 +35,7 @@ const App = () => {
   const [bookmarks, setBookmarks] = useState<Bookmark>();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchQueryDelayed, setSearchQueryDelayed] = useState<string>("");
+  const [keyboardHints, setKeyboardHints] = useState<KeyboardHintsContext>("search.empty");
 
   // Load users bookmarks
   useEffect(() => {
@@ -78,12 +80,9 @@ const App = () => {
         }}
         className={styles.searchBar}
       />
+      <KeyboardHints context={keyboardHints} />
       <div id="search" className={styles.searchResults}>
         {/* TODO: Make this hints appear dynamically and maybe move it to the bottom */}
-        <p>
-          <kbd>Tab</kbd> to focus on bookmarks.
-          <kbd>Enter</kbd> to search the web.
-        </p>
         <SearchResult bookmarks={bookmarks} query={searchQueryDelayed} />
       </div>
     </main>

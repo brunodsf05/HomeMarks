@@ -88,4 +88,5 @@ kbd {
   user-select: none;
   line-height: 1;
   white-space: nowrap;
+  font-size: 0.8em;
 }
