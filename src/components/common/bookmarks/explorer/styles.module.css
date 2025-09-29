@@ -19,8 +19,6 @@
   background: var(--color-clickable);
   cursor: default;
   overflow: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-border) transparent;
 }
 
 .pathLeaf {
