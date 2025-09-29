@@ -23,11 +23,12 @@ const keyboardHintsText: KeyboardHintsText = {
 
 interface KeyboardHintsProps {
   context: KeyboardHintsContext;
+  className: string;
 }
 
-export const KeyboardHints: React.FC<KeyboardHintsProps> = ({ context }) => {
+export const KeyboardHints: React.FC<KeyboardHintsProps> = ({ context, className }) => {
   return (
-    <div className={styles.this}>
+    <div className={`${styles.this} ${className}`}>
       {
         Object.entries(keyboardHintsText[context]).map(([keys, hint]) =>
           <div className={styles.hintTuple}>
