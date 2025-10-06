@@ -133,4 +133,13 @@ export interface IBookmarkService {
    * @param leaf The deepest folder to end at. If it is a folder, it will be included.
    */
   getFolderRange(root: Bookmark, leaf: Bookmark): Bookmark[];
+  /**
+   * Given a root bookmark folder, this function produces a new folder that
+   * represents the filtered search result.
+   *
+   * @param root Root bookmark folder to start the search from.
+   * @param filter Filtering and result-structuring options.
+   * @returns A bookmark folder called "root" containing the filtered
+   */
+  filter(root: Bookmark, filter: BookmarkSearchFilter): Bookmark;
 }
