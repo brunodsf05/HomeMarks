@@ -1,3 +1,4 @@
+import { Fragment } from "react/jsx-runtime";
 import styles from "./_keyboardHints.module.css";
 
 export type KeyboardHintsContext = "search.empty" | "search.written" | "bookmark";
@@ -31,13 +32,16 @@ export const KeyboardHints: React.FC<KeyboardHintsProps> = ({ context, className
     <div className={`${styles.this} ${className}`}>
       {
         Object.entries(keyboardHintsText[context]).map(([keys, hint]) =>
-          <div className={styles.hintTuple}>
-            {keys.split("+").map((key, i) => (
-              <>
-                {i !== 0 && "+"}
-                <kbd>{key}</kbd>
-              </>
-            ))}
+          // Key + Hint
+          <div key={keys} className={styles.hintTuple}>
+            {
+              keys.split("+").map((key, i) =>
+                <Fragment key={`${keys}-${i}`}>
+                  {i !== 0 && "+"}
+                  <kbd>{key}</kbd>
+                </Fragment>
+              )
+            }
             <p>{hint}</p>
           </div>
         )
