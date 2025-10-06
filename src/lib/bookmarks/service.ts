@@ -1,5 +1,10 @@
 import browser from "@/lib/browser_api";
-import type { Bookmark, IBookmarkService, WellKnownFolders } from "./types";
+import type {
+  Bookmark,
+  WellKnownFolders,
+  BookmarkSearchFilter,
+  IBookmarkService,
+} from "./types";
 
 /**
  * Singleton service to manage bookmarks. Attempts to abstract the underlying browser API for both
@@ -107,5 +112,15 @@ export class BookmarkService implements IBookmarkService {
     // Start DFS
     // TODO: Remove children from each bookmark to reduce memory usage. This requires updating BookmarkExplorer.PathBar behavior so it does not depend's of this function's returned array.
     return findPath(oldest, youngestFolderId) ?? [];
+  }
+
+  public filter(root: Bookmark, filter: BookmarkSearchFilter): Bookmark {
+    const children: Bookmark[] = [];
+
+    return {
+      id: "0",
+      title: "root",
+      children: children
+    };
   }
 }
