@@ -17,10 +17,12 @@ const SearchResult: React.FC<SearchResultProps> = ({ bookmarks, query }) => {
 
   // Filter
   useEffect(() => {
-    if (bookmarks === undefined) return;
+    if (bookmarks === undefined || query.length === 0) {
+      setExplorers([]);
+      return;
+    }
 
     setExplorers([
-      bookmarks,
       BookmarkService.getInstance().filter(
         bookmarks,
         {
@@ -37,12 +39,10 @@ const SearchResult: React.FC<SearchResultProps> = ({ bookmarks, query }) => {
 
   return (
     <>
-      {
-        query.length > 0 && <p>DEBUG: Wants to search</p>
-      }
+      <BookmarkExplorer key={bookmarks.id} rootBookmark={bookmarks} />
       {
         explorers.map((b, i) =>
-          <BookmarkExplorer key={i} rootBookmark={b} />
+          <BookmarkExplorer key={`${i}-${b.id}`} rootBookmark={b} />
         )
       }
     </>
