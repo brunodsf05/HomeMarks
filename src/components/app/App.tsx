@@ -17,6 +17,19 @@ const SearchResult: React.FC<SearchResultProps> = ({ bookmarks, query }) => {
 
   const explorers: Bookmark[] = [bookmarks];
 
+  // Filter
+  // TODO: Use effect
+
+  explorers.push(BookmarkService.getInstance().filter(
+    bookmarks,
+    {
+      title: new RegExp(`.*${query}.*`, "i"),
+      type: "all",
+      style: "flat"
+    }
+  ));
+
+  // Filter
   return (
     <>
       {
@@ -88,4 +101,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App;;
