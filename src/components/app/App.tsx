@@ -73,13 +73,7 @@ const App = () => {
     <main className={styles.this}>
       <h1>Bookmarks</h1>
       <DelayedInput
-        onInstantChange={
-          (line) => {
-            setSearchQuery(line);
-            if (line === "")
-              setSearchQueryDelayed("");
-          }
-        }
+        onInstantChange={(line) => setSearchQuery(line)}
         onDelayedChange={(line) => setSearchQueryDelayed(line)}
         delayChangeMs={500}
         type="search"
