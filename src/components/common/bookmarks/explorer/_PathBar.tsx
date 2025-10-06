@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, Fragment } from "react";
 import { BookmarkService, type Bookmark } from "@/lib/bookmarks";
 import { Leaf } from "./_PathLeaf";
 import styles from "./styles.module.css";
@@ -36,10 +36,10 @@ export const PathBar: React.FC<PathBarProps> = ({ rootBookmark, currentBookmark,
     <div ref={barRef} className={styles.pathBar}>
       {
         path.map((b, idx) => (
-          <>
+          <Fragment key={idx}>
             {idx !== 0 && <Separator />}
-            <Leaf key={idx} bookmark={b} onClick={onFolderClick} />
-          </>
+            <Leaf bookmark={b} onClick={onFolderClick} />
+          </Fragment>
         ))
       }
     </div>
