@@ -13,23 +13,28 @@ interface SearchResultProps {
 }
 
 const SearchResult: React.FC<SearchResultProps> = ({ bookmarks, query }) => {
+  const [explorers, setExplorers] = useState<Bookmark[]>([]);
+
+  // Filter
+  useEffect(() => {
+    if (bookmarks === undefined) return;
+
+    setExplorers([
+      bookmarks,
+      BookmarkService.getInstance().filter(
+        bookmarks,
+        {
+          title: new RegExp(`${query}`, "i"),
+          type: "all",
+          style: "flat"
+        }
+      )
+    ]);
+  }, [bookmarks, query]);
+
+  // Render
   if (!bookmarks) return <></>;
 
-  const explorers: Bookmark[] = [bookmarks];
-
-  // Filter
-  // TODO: Use effect
-
-  explorers.push(BookmarkService.getInstance().filter(
-    bookmarks,
-    {
-      title: new RegExp(`.*${query}.*`, "i"),
-      type: "all",
-      style: "flat"
-    }
-  ));
-
-  // Filter
   return (
     <>
       {
