@@ -3,7 +3,7 @@ import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { WebSearchService } from "@/lib/websearch";
 import { BookmarkExplorer } from "@/components/common/bookmarks";
 import { exampleBookmark } from "@/globals.d"; // TODO: Remove
-import { DelayedInput } from "./_DelayedInput";
+import { DelayedInput } from "@/components/common/DelayedInput";
 import { KeyboardHints, type KeyboardHintsContext } from "./_KeyboardHints";
 import styles from "./App.module.css";
 
