@@ -13,6 +13,13 @@ export interface Bookmark {
   folderType?: string;
 }
 
+/**
+ * Browser's have the root-level bookmarks-folders.
+ * These bookmarks are the only ones to have set the property `folderType`.
+ * Depending of the browser the same folder can have diferent folderType name.
+ * For example, the bookmarks bar for chrome is "Bookmarks bar" and firefox is "toolbar"
+ * So the purpouse of this type is to select which root-level bookmark-folder with IBookmarkService being browser-agnostic.
+ */
 export type WellKnownFolders = "bar";
 
 /**
