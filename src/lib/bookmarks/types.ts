@@ -22,6 +22,43 @@ export interface Bookmark {
  */
 export type WellKnownFolders = "bar";
 
+export type BookmarkSearchFilter = {
+  /**
+   * Regular expression used to filter bookmarks by their title.
+   * If omitted, no filtering by title is applied.
+   */
+  title?: RegExp;
+  /**
+   * Regular expression used to filter bookmarks by their URL.
+   * Ignored for bookmark folders since they do not have URLs.
+   * If omitted, no filtering by URL is applied.
+   */
+  url?: RegExp;
+  /**
+   * Restricts the type of bookmarks returned.
+   * - "all": return both folders and URLs (subject to filters).
+   * - "folder": return only folder bookmarks.
+   * - "url": return only URL bookmarks.
+   */
+  type: "all" | "folder" | "url";
+  /**
+   * Defines the structure of the search result.
+   * In both cases the result is wrapped in a "root" folder bookmark.
+   *
+   * - "flat": all matching elements are returned as direct children of "root".
+   *   Example: searching "dog" would return root containing only the matching
+   *   bookmarks, without their original folder hierarchy.
+   *
+   * - "hierarchy": returns the original folder structure but pruned so that
+   *   only folders and bookmarks matching the filters remain.
+   *   Example: searching "dog" in "/animals/dog" would return a "root" that
+   *   contains the "animals" folder, which itself contains the "dog" bookmark.
+   *   Even if "animals" does not match the filter, it is kept because it
+   *   contains a matching descendant.
+   */
+  style: "flat" | "hierarchy";
+};
+
 /**
  * Declares what a BookmarkService should do.
  */
