@@ -131,12 +131,16 @@ export class BookmarkService implements IBookmarkService {
       return result;
 
     // Filtering
+    // TODO: Mark bookmarks as wanted with some kind of metadata like extra.filter.wanted to add useful visual clues
     const search = (node: Bookmark | undefined): Bookmark | undefined => {
       if (!node) return undefined;
 
       const isFolder = this.isFolder(node);
+      const doesTitleMatch = filter.title?.test(node.title);
 
       if (isFolder) {
+        if (filter.title && doesTitleMatch && filter.type !== "url") return node; // TODO: Related to extra.filter, mark this folder as wanted
+
         // Recursively apply filter to children
         const filteredChildren: Bookmark[] = (node.children ?? [])
           .map(child => search(child))
@@ -148,11 +152,11 @@ export class BookmarkService implements IBookmarkService {
       }
       else {
         // Discard if bookmark does not match filter's type
-        if (filter.type === "folder" && !isFolder) return undefined;
+        if (filter.type === "folder") return undefined;
         if (filter.type === "url" && isFolder) return undefined;
 
         // Discard depending if one of the present RegEx filters do not match with tested
-        if (filter.title && !filter.title?.test(node.title)) return undefined;
+        if (filter.title && !doesTitleMatch) return undefined;
         if (filter.url && !filter.url?.test(node.url!)) return undefined;
 
         // Node is valid
