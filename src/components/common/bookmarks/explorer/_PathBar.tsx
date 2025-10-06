@@ -23,13 +23,14 @@ export const PathBar: React.FC<PathBarProps> = ({ rootBookmark, currentBookmark,
     const barEl = barRef.current;
     if (!barEl) return;
 
-    const handleWheel = (e: WheelEvent) => {
+    // Allows to scroll the path bar with mouse wheel
+    const handleScroll = (e: WheelEvent) => {
       e.preventDefault();
       barEl.scrollLeft += e.deltaY;
     };
-    barEl.addEventListener("wheel", handleWheel, { passive: false });
+    barEl.addEventListener("wheel", handleScroll, { passive: false });
 
-    return () => barEl.removeEventListener("wheel", handleWheel);
+    return () => barEl.removeEventListener("wheel", handleScroll);
   }, []);
 
   return (
