@@ -115,12 +115,53 @@ export class BookmarkService implements IBookmarkService {
   }
 
   public filter(root: Bookmark, filter: BookmarkSearchFilter): Bookmark {
-    const children: Bookmark[] = [];
-
-    return {
-      id: "0",
+    // Initialization
+    let result: Bookmark = {
+      id: `filtered-${Date.now()}`,
       title: "root",
-      children: children
+      children: []
     };
+
+    // Constraints
+    const skipFilter =
+      !this.isFolder(root) || // is url
+      (root.children?.length ?? 0) === 0; // is childless
+
+    if (skipFilter)
+      return result;
+
+    // Filtering
+    const search = (node: Bookmark | undefined): Bookmark | undefined => {
+      if (!node) return undefined;
+
+      const isFolder = this.isFolder(node);
+
+      if (isFolder) {
+        // Recursively apply filter to children
+        const filteredChildren: Bookmark[] = (node.children ?? [])
+          .map(child => search(child))
+          .filter((child) => child !== undefined);
+
+        return (filteredChildren.length > 0)
+          ? { ...node, children: filteredChildren }
+          : undefined;
+      }
+      else {
+        // Discard if bookmark does not match filter's type
+        if (filter.type === "folder" && !isFolder) return undefined;
+        if (filter.type === "url" && isFolder) return undefined;
+
+        // Discard depending if one of the present RegEx filters do not match with tested
+        if (filter.title && !filter.title?.test(node.title)) return undefined;
+        if (filter.url && !filter.url?.test(node.url!)) return undefined;
+
+        // Node is valid
+        return node;
+      }
+    };
+
+    // Retrieve
+    result.children = search(root)?.children ?? [];
+    return result;
   }
 }
