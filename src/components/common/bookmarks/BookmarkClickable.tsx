@@ -22,6 +22,7 @@ export const BookmarkClickable: React.FC<BookmarkComponentProps> = ({ bookmark, 
                     draggable={false}
                     additionalClassNames={{
                       container: styles.faviconContainerMultiple,
+                      background: styles.faviconBackgroundMultiple,
                       icon: styles.faviconIconMultiple
                     }}
                   />

@@ -1,8 +1,7 @@
 :root {
-  --favicon-size: 8rem;
   --folder-cols: 2;
-  --favicon-size-small: calc(var(--favicon-size) / var(--folder-cols));
-  --border: 0.1rem;
+  --size-favicon-clickable-small: calc(var(--size-favicon-clickable) / var(--folder-cols));
+  --size-border: 0.1rem;
   --radius: 2rem;
   --favicon-radius: 1rem;
   --favicon-radius-small: 0.5rem;
@@ -15,7 +14,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: var(--favicon-size);
+  width: var(--size-favicon-clickable);
   gap: 0.5rem;
   cursor: pointer;
   user-select: none;
@@ -33,10 +32,10 @@
 /* Favicon display */
 .faviconContainerSingle,
 .faviconFolder {
-  width: var(--favicon-size);
-  height: var(--favicon-size);
+  width: var(--size-favicon-clickable);
+  height: var(--size-favicon-clickable);
   border-radius: var(--radius);
-  box-shadow: inset 0 0 0 var(--border) hsla(0, 0%, 100%, 0.1);
+  box-shadow: var(--style-border-favicon);
   box-shadow: var(--style-shadow-floating);
 }
 
@@ -47,7 +46,7 @@
   inset: 0;
   pointer-events: none;
   border-radius: var(--radius);
-  box-shadow: inset 0 0 0 var(--border) hsla(0, 0%, 100%, 0.1);
+  box-shadow: var(--style-border-favicon);
   z-index: 1;
 }
 
@@ -68,9 +67,14 @@
 }
 
 .faviconContainerMultiple {
-  width: var(--favicon-size-small);
-  height: var(--favicon-size-small);
-  background: #ffffff40 !important;
+  width: var(--size-favicon-clickable-small);
+  height: var(--size-favicon-clickable-small);
+  background: linear-gradient(to right, #eeeeee, #ffffff) !important;
+}
+
+.faviconBackgroundMultiple {
+  transform: translate(0, 150%) scale(3);
+  filter: blur(1rem) saturate(5);
 }
 
 .faviconIconMultiple {
