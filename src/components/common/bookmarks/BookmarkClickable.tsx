@@ -14,6 +14,8 @@ export const BookmarkClickable: React.FC<BookmarkComponentProps> = ({ bookmark, 
           ? <div className={styles.faviconFolder}>
             {
               bookmark.children?.map((b) => {
+                const isChildFolder: boolean = BookmarkService.getInstance().isFolder(b);
+
                 return (
                   <FaviconBox
                     key={`${b.id}`}
