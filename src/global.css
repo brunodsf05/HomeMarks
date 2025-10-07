@@ -7,14 +7,17 @@
   --color-text: #eee;
 
   --size-page-width: min(60rem, 100%);
+  --size-favicon-clickable: 8rem;
+  --size-border: 0.1rem;
 
   --material-bg: linear-gradient(0deg, var(--color-bg) 0%, #111 100%);
   --material-panel: linear-gradient(0deg, var(--color-panel) 0%, #333 100%);
 
   --font-text: dm-sans, Arial, Helvetica, sans-serif;
 
-  --style-border: 0.1rem solid var(--color-border);
-  --style-border-input: 0.1rem solid var(--color-bg);
+  --style-border: var(--size-border) solid var(--color-border);
+  --style-border-input: var(--size-border) solid var(--color-bg);
+  --style-border-favicon: inset 0 0 0 var(--size-border) hsla(0, 0%, 100%, 0.1);
   --style-shadow-floating: 0 0 0.5rem black;
 }
 
