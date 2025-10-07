@@ -114,6 +114,38 @@ export class BookmarkService implements IBookmarkService {
     return findPath(oldest, youngestFolderId) ?? [];
   }
 
+  public listFolderIcons(folder: Bookmark, limit: number): Bookmark[] {
+    // Constraints
+    if (limit <= 0 || !this.isFolder(folder)) return [];
+
+    // Defensive check
+    if (!folder.children || folder.children.length === 0) return [];
+
+    // Separate URLs and folders
+    const urls: Bookmark[] = [];
+    const folders: Bookmark[] = [];
+    let timesUrl = 0;
+
+    for (const child of folder.children) {
+      if (this.isFolder(child)) {
+        folders.push({ ...child, children: [] }); // Optimize memory
+      }
+      else {
+        urls.push(child);
+        timesUrl++;
+      }
+
+      if (timesUrl >= limit)
+        break;
+    }
+
+    // Combine with URLs first, folders after
+    const ordered = [...urls, ...folders];
+
+    // Trim to limit
+    return ordered.slice(0, limit);
+  }
+
   public filter(root: Bookmark, filter: BookmarkSearchFilter): Bookmark {
     // Initialization
     let result: Bookmark = {

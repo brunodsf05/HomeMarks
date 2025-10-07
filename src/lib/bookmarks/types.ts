@@ -134,6 +134,15 @@ export interface IBookmarkService {
    */
   getFolderRange(root: Bookmark, leaf: Bookmark): Bookmark[];
   /**
+   * Reads a bookmark folder and returns its children sorted by type (urls first folder last).
+   * This is useful when rendering the preview of a folder's children.
+   * Said order will prioritize urls if there are the same or more ammount as limit.
+   * 
+   * @param folder The bookmark folder to read it's children.
+   * @returns The icons that should appear, array is trimmed so expect no children in folders.
+   */
+  listFolderIcons(folder: Bookmark, limit: number): Bookmark[];
+  /**
    * Given a root bookmark folder, this function produces a new folder that
    * represents the filtered search result.
    *
