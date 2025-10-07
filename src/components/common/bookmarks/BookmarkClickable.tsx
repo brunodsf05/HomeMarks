@@ -4,12 +4,14 @@ import { type BookmarkComponentProps, onClickNotImplemented } from "./common";
 import styles from "./BookmarkClickable.module.css";
 
 export const BookmarkClickable: React.FC<BookmarkComponentProps> = ({ bookmark, onClick = onClickNotImplemented }) => {
-  const isFolder: boolean = BookmarkService.getInstance().isFolder(bookmark);
+  const isFolder = BookmarkService.getInstance().isFolder(bookmark);
+  const hasChildren = (bookmark.children?.length ?? 0) > 0;
+  const renderFolder = isFolder && hasChildren;
 
   return (
     <div onClick={() => onClick(bookmark)} className={styles.this}>
       {
-        isFolder
+        renderFolder
           // Render folder's children
           ? <div className={styles.faviconFolder}>
             {
