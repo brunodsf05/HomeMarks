@@ -12,18 +12,7 @@ function generateClassNameString(defaultClassName: string, overrideClassName?: s
   return `${overrideClassName ?? defaultClassName} ${additionalClassName ?? ""}`;
 }
 
-/**
- * A component that displays the favicon for a given URL inside a box thats the same image.
- * Thanks to this the background can be a blurred version of the favicon to simulate an automatic bg color.
- *
- * You can modify the className applied for each part of this component. See `FaviconBoxClassNames` to know the targets.
- *
- * @param url The URL of the website to fetch the favicon for.
- * @param size The size of the favicon to display (default is 16).
- * @param overrideClassNames Overrides the default className.
- * @param additionalClassNames Adds a new className on top of the default/overriden className. 
- */
-export function FaviconBox({ url, size, overrideClassNames, additionalClassNames }: FaviconBoxProps) {
+export const FaviconBox: React.FC<FaviconBoxProps> = ({ url, size, overrideClassNames, additionalClassNames }) => {
   const [faviconBg, setFaviconBg] = useState<string>();
 
   const containerClassName = generateClassNameString(styles.container, overrideClassNames?.container, additionalClassNames?.container);
@@ -45,4 +34,4 @@ export function FaviconBox({ url, size, overrideClassNames, additionalClassNames
       />}
     </div>
   );
-}
+};
