@@ -35,6 +35,18 @@
   background: #fff4;
 }
 
+.pathSeparator {
+  --icon: url("/src/assets/icons/path_separator.svg") no-repeat center;
+  display: inline-block;
+  height: 0.8rem;
+  background-color: var(--color-text);
+  aspect-ratio: 226 / 416;
+  mask: var(--icon);
+  mask-size: contain;
+  -webkit-mask: var(--icon);
+  -webkit-mask-size: contain;
+}
+
 /* Clickables */
 .clickableContainer {
   display: flex;

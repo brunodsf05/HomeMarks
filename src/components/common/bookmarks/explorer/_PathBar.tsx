@@ -1,12 +1,13 @@
 import { useEffect, useRef, Fragment } from "react";
 import { BookmarkService, type Bookmark } from "@/lib/bookmarks";
+import pathSeparatorIcon from "@/assets/icons/path_separator.svg";
 import { Leaf } from "./_PathLeaf";
 import styles from "./styles.module.css";
 
 const TIME_TO_ALLOW_SCROLLING = 100; // ms
 
 const Separator: React.FC = () => (
-  <div>►</div>
+  <span className={styles.pathSeparator} />
 );
 
 interface PathBarProps {
