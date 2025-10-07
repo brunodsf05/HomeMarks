@@ -31,6 +31,7 @@ interface FaviconBoxClassNames {
 export interface FaviconBoxProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   /**
    * Url The URL of the website to fetch the favicon for.
+   * If not passed a folder icon will be used.
    */
   url?: string;
   /**
