@@ -13,23 +13,19 @@ export const BookmarkClickable: React.FC<BookmarkComponentProps> = ({ bookmark, 
           // Render folder's children
           ? <div className={styles.faviconFolder}>
             {
-              bookmark.children?.map((b) => {
-                const isChildFolder: boolean = BookmarkService.getInstance().isFolder(b);
-
-                return (
-                  <FaviconBox
-                    key={`${b.id}`}
-                    url={b.url}
-                    size={16}
-                    draggable={false}
-                    additionalClassNames={{
-                      container: styles.faviconContainerMultiple,
-                      background: styles.faviconBackgroundMultiple,
-                      icon: styles.faviconIconMultiple
-                    }}
-                  />
-                );
-              })
+              bookmark.children?.map((b) => (
+                <FaviconBox
+                  key={`${b.id}`}
+                  url={b.url}
+                  size={16}
+                  draggable={false}
+                  additionalClassNames={{
+                    container: styles.faviconContainerMultiple,
+                    background: styles.faviconBackgroundMultiple,
+                    icon: styles.faviconIconMultiple
+                  }}
+                />
+              ))
             }
           </div>
           // Render website's favicon
