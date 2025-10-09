@@ -97,6 +97,7 @@ const App = () => {
           }
         }}
         className={styles.searchBar}
+        data-keynav="ignore-up ignore-left ignore-right"
       />
       <div id="search" className={styles.searchResults}>
         <SearchResult bookmarks={bookmarks} query={searchQueryDelayed} />
