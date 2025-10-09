@@ -14,9 +14,22 @@ type KeyNavSettings = {
 };
 
 /**
- * Get all focusable elements in the document.
+ * Get all focusable elements in the document,
+ * filtering out those that explicitly opt out of navigation in the given direction.
+ *
+ * Usage example:
+ *   <button data-keynav="ignore-left ignore-up">Click</button>
+ *
+ * Explanation:
+ * - Elements can define the `data-keynav` attribute with one or more flags:
+ *     ignore-up, ignore-down, ignore-left, ignore-right
+ * - If the flag for the current direction exists, that element will be ignored
+ *   when computing focus navigation.
+ *
+ * @param direction - The direction we are moving (UP, DOWN, LEFT, RIGHT).
+ * @returns A list of focusable elements that can be navigated to in that direction.
  */
-function getFocusableElements(): HTMLElement[] {
+function getFocusableElements(direction: Direction): HTMLElement[] {
   return Array.from(document.querySelectorAll<HTMLElement>(`
     a[href],
     button,
@@ -24,7 +37,18 @@ function getFocusableElements(): HTMLElement[] {
     textarea,
     select,
     [tabindex]:not([tabindex="-1"])
-  `)).filter(el => !el.hasAttribute("disabled"));
+  `))
+    .filter(el => !el.hasAttribute("disabled"))
+    .filter(el => {
+      const flags = (el.dataset.keynav || "").split(/\s+/).map(f => f.toLowerCase());
+      switch (direction) {
+        case Direction.UP: return !flags.includes("ignore-up");
+        case Direction.DOWN: return !flags.includes("ignore-down");
+        case Direction.LEFT: return !flags.includes("ignore-left");
+        case Direction.RIGHT: return !flags.includes("ignore-right");
+        default: return true;
+      }
+    });
 }
 
 /**
@@ -116,7 +140,7 @@ export function initKeyNav(settings: KeyNavSettings = {}): ClearKeyNavFunction {
     if (direction === undefined) return;
 
     // List elements to consider focusing
-    const focusable = getFocusableElements();
+    const focusable = getFocusableElements(direction);
     const current = document.activeElement as HTMLElement | null;
     if (!current || !focusable.includes(current)) return;
 
