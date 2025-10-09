@@ -25,12 +25,14 @@ export const BookmarkExplorer: React.FC<BookmarkExplorerProps> = ({ rootBookmark
 
   const onBookmarkClickHandler = (b: Bookmark) => {
     if (hasClicked) return;
+    setHasClicked(true);
 
     const executeWithDelay = async () => {
       await new Promise(resolve => setTimeout(resolve, CLICK_DELAY));
 
       const isFolder = BookmarkService.getInstance().isFolder(b);
       (isFolder ? onBookmarkFolderClickHandler : onBookmarkUrlClickHandler)(b);
+      setHasClicked(false);
     };
 
     executeWithDelay();
