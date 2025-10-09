@@ -9,7 +9,7 @@ export const BookmarkClickable: React.FC<BookmarkComponentProps> = ({ bookmark, 
   const renderFolder = isFolder && hasChildren;
 
   return (
-    <div onClick={() => onClick(bookmark)} className={styles.this}>
+    <button onClick={() => onClick(bookmark)} className={styles.this}>
       {
         renderFolder
           // Render folder's children
@@ -43,6 +43,6 @@ export const BookmarkClickable: React.FC<BookmarkComponentProps> = ({ bookmark, 
       }
 
       <p className={styles.title}>{bookmark.title}</p>
-    </div>
+    </button>
   );
 };
