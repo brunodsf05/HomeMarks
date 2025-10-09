@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { WebSearchService } from "@/lib/websearch";
+import { initKeyNav } from "@/lib/keynav";
 import { BookmarkExplorer } from "@/components/common/bookmarks";
 import { exampleBookmark } from "@/globals.d"; // TODO: Remove
 import { DelayedInput } from "@/components/common/DelayedInput";
@@ -14,6 +15,11 @@ interface SearchResultProps {
 
 const SearchResult: React.FC<SearchResultProps> = ({ bookmarks, query }) => {
   const [explorers, setExplorers] = useState<Bookmark[]>([]);
+
+  useEffect(() => {
+    const clearKeyNav = initKeyNav();
+    return () => clearKeyNav();
+  });
 
   // Filter
   useEffect(() => {
