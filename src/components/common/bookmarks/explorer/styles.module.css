@@ -25,20 +25,26 @@
   border-radius: 0.5rem;
   cursor: pointer;
   user-select: none;
-}
-
-.pathLeaf {
   padding: 0.5rem 0.5rem;
+  background: transparent;
+  border: 0;
 }
 
-.pathLeaf:hover {
+.pathLeaf:hover,
+.pathLeaf:focus-visible {
   background: #fff4;
+}
+
+.pathLeaf:focus-visible {
+  box-shadow: inset 0 0 0 0.1rem var(--color-text);
+  outline: none;
 }
 
 .pathSeparator {
   --icon: url("/src/assets/icons/path_separator.svg") no-repeat center;
   display: inline-block;
   height: 0.8rem;
+  padding: 0 0.5rem;
   background-color: var(--color-text);
   aspect-ratio: 226 / 416;
   mask: var(--icon);
