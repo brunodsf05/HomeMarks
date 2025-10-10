@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { WebSearchService } from "@/lib/websearch";
 import { initKeyNav } from "@/lib/keynav";
@@ -61,6 +61,8 @@ const App = () => {
   const [searchQueryDelayed, setSearchQueryDelayed] = useState<string>("");
   const [keyboardHints, setKeyboardHints] = useState<KeyboardHintsContext>("search.empty");
 
+  const refInput = useRef<HTMLInputElement>(null);
+
   // Load users bookmarks
   useEffect(() => {
     // TODO: Remove this "if" and keep "else", just for testing
@@ -73,6 +75,18 @@ const App = () => {
       .getWellKnown("bar")
       .then((b) => setBookmarks(b))
       .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        refInput.current?.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return (
@@ -98,6 +112,7 @@ const App = () => {
         }}
         className={styles.searchBar}
         data-keynav="ignore-up ignore-left ignore-right"
+        {...{ ref: refInput }}
       />
       <div id="search" className={styles.searchResults}>
         <SearchResult bookmarks={bookmarks} query={searchQueryDelayed} />
