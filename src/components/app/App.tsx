@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { WebSearchService } from "@/lib/websearch";
+import { initKeyNav } from "@/lib/keynav";
 import { exampleBookmark } from "@/globals.d"; // TODO: Remove
 
 import { DelayedInput } from "@/components/common/DelayedInput";
@@ -33,7 +34,10 @@ const App = () => {
       .catch(console.error);
   }, []);
 
+
+
   useEffect(() => {
+    const clearKeyNav = initKeyNav();
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
@@ -42,7 +46,10 @@ const App = () => {
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      clearKeyNav();
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   return (
