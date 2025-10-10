@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
-import { initKeyNav } from "@/lib/keynav";
 import { BookmarkExplorer } from "@/components/common/bookmarks";
 
 interface SearchResultProps {
@@ -11,10 +10,6 @@ interface SearchResultProps {
 export const SearchResult: React.FC<SearchResultProps> = ({ bookmarks, query }) => {
   const [explorers, setExplorers] = useState<Bookmark[]>([]);
 
-  useEffect(() => {
-    const clearKeyNav = initKeyNav();
-    return () => clearKeyNav();
-  });
 
   // Filter
   useEffect(() => {
