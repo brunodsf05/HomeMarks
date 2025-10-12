@@ -34,8 +34,7 @@ const App = () => {
       .catch(console.error);
   }, []);
 
-
-
+  // Init input manager
   useEffect(() => {
     const clearKeyNav = initKeyNav();
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -75,7 +74,7 @@ const App = () => {
         }}
         className={styles.searchBar}
         data-keynav="ignore-up ignore-left ignore-right"
-        {...{ ref: refInput }}
+        {...{ ref: refInput, autoFocus: true }}
       />
       <div id="search" className={styles.searchResults}>
         <SearchResult bookmarks={bookmarks} query={searchQueryDelayed} />
