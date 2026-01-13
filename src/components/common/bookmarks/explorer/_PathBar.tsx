@@ -6,9 +6,7 @@ import styles from "./styles.module.css";
 
 const TIME_TO_ALLOW_SCROLLING = 100; // ms
 
-const Separator: React.FC = () => (
-  <span className={styles.pathSeparator} />
-);
+const Separator: React.FC = () => <span className={styles.pathSeparator} />;
 
 interface PathBarProps {
   rootBookmark: Bookmark;
@@ -16,10 +14,17 @@ interface PathBarProps {
   onFolderClick: (bookmark: Bookmark) => void;
 }
 
-export const PathBar: React.FC<PathBarProps> = ({ rootBookmark, currentBookmark, onFolderClick }) => {
-  const path: Bookmark[] = BookmarkService.getInstance().getFolderRange(rootBookmark, currentBookmark);
+export const PathBar: React.FC<PathBarProps> = ({
+  rootBookmark,
+  currentBookmark,
+  onFolderClick,
+}) => {
+  const path: Bookmark[] = BookmarkService.getInstance().getFolderRange(
+    rootBookmark,
+    currentBookmark,
+  );
 
-  // Converts vertical scrolling into horizontal 
+  // Converts vertical scrolling into horizontal
   const barRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -72,14 +77,12 @@ export const PathBar: React.FC<PathBarProps> = ({ rootBookmark, currentBookmark,
 
   return (
     <div ref={barRef} className={styles.pathBar}>
-      {
-        path.map((b, idx) => (
-          <Fragment key={idx}>
-            {idx !== 0 && <Separator />}
-            <Leaf bookmark={b} onClick={onFolderClick} />
-          </Fragment>
-        ))
-      }
+      {path.map((b, idx) => (
+        <Fragment key={idx}>
+          {idx !== 0 && <Separator />}
+          <Leaf bookmark={b} onClick={onFolderClick} />
+        </Fragment>
+      ))}
     </div>
   );
 };

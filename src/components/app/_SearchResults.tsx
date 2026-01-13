@@ -3,13 +3,15 @@ import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { BookmarkExplorer } from "@/components/common/bookmarks";
 
 interface SearchResultProps {
-  bookmarks?: Bookmark,
+  bookmarks?: Bookmark;
   query: string;
 }
 
-export const SearchResult: React.FC<SearchResultProps> = ({ bookmarks, query }) => {
+export const SearchResult: React.FC<SearchResultProps> = ({
+  bookmarks,
+  query,
+}) => {
   const [explorers, setExplorers] = useState<Bookmark[]>([]);
-
 
   // Filter
   useEffect(() => {
@@ -19,14 +21,11 @@ export const SearchResult: React.FC<SearchResultProps> = ({ bookmarks, query }) 
     }
 
     setExplorers([
-      BookmarkService.getInstance().filter(
-        bookmarks,
-        {
-          title: new RegExp(`${query}`, "i"),
-          type: "all",
-          style: "flat"
-        }
-      )
+      BookmarkService.getInstance().filter(bookmarks, {
+        title: new RegExp(`${query}`, "i"),
+        type: "all",
+        style: "flat",
+      }),
     ]);
   }, [bookmarks, query]);
 
@@ -36,11 +35,9 @@ export const SearchResult: React.FC<SearchResultProps> = ({ bookmarks, query }) 
   return (
     <>
       <BookmarkExplorer key={bookmarks.id} rootBookmark={bookmarks} />
-      {
-        explorers.map((b, i) =>
-          <BookmarkExplorer key={`${i}-${b.id}`} rootBookmark={b} />
-        )
-      }
+      {explorers.map((b, i) => (
+        <BookmarkExplorer key={`${i}-${b.id}`} rootBookmark={b} />
+      ))}
     </>
   );
 };

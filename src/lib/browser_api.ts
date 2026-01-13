@@ -1,4 +1,4 @@
-const glb = (globalThis as any);
+const glb = globalThis as any;
 const isChrome = glb.chrome !== undefined;
 const api = glb[isChrome ? "chrome" : "browser"];
 
@@ -22,7 +22,7 @@ const browserApi: BrowserApi = {
     all: api,
     bookmarks: api.bookmarks,
     search: api.search,
-  }
+  },
 };
 
 export default browserApi;

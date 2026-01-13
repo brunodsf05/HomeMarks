@@ -22,7 +22,7 @@ export class WebSearchService implements IWebSearchService {
 
   public search(text: string): void {
     this.api.query({
-      text: text
+      text: text,
     });
   }
 }

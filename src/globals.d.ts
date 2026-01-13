@@ -11,19 +11,19 @@ export const exampleBookmark: Bookmark = {
       id: "2",
       parentId: "1",
       title: "Google",
-      url: "https://www.google.com"
+      url: "https://www.google.com",
     },
     {
       id: "3",
       parentId: "1",
       title: "Wikipedia",
-      url: "https://www.wikipedia.org"
+      url: "https://www.wikipedia.org",
     },
     {
       id: "4",
       parentId: "1",
       title: "Unsplash",
-      url: "https://unsplash.com"
+      url: "https://unsplash.com",
     },
     {
       id: "5",
@@ -35,33 +35,33 @@ export const exampleBookmark: Bookmark = {
           id: "6",
           parentId: "5",
           title: "Youtube",
-          url: "https://www.youtube.com"
+          url: "https://www.youtube.com",
         },
         {
           id: "7",
           parentId: "5",
           title: "Netflix",
-          url: "https://www.netflix.com"
+          url: "https://www.netflix.com",
         },
         {
           id: "8",
           parentId: "5",
           title: "Spotify",
-          url: "https://www.spotify.com"
+          url: "https://www.spotify.com",
         },
         {
           id: "9",
           parentId: "5",
           title: "Soundcloud",
-          url: "https://soundcloud.com"
+          url: "https://soundcloud.com",
         },
         {
           id: "10",
           parentId: "5",
           title: "Tiktok",
-          url: "https://www.tiktok.com"
-        }
-      ]
+          url: "https://www.tiktok.com",
+        },
+      ],
     },
     {
       id: "11",
@@ -69,18 +69,17 @@ export const exampleBookmark: Bookmark = {
       title: "Trabajo",
       folderType: "folder",
       children: [
-
         {
           id: "13",
           parentId: "11",
           title: "LinkedIn",
-          url: "https://www.linkedin.com"
+          url: "https://www.linkedin.com",
         },
         {
           id: "12",
           parentId: "11",
           title: "GitHub",
-          url: "https://github.com/"
+          url: "https://github.com/",
         },
         {
           id: "14",
@@ -106,17 +105,17 @@ export const exampleBookmark: Bookmark = {
                           id: "18",
                           parentId: "17",
                           title: "GitHub",
-                          url: "https://github.com/"
+                          url: "https://github.com/",
                         },
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
         },
-      ]
+      ],
     },
-  ]
+  ],
 };

@@ -6,7 +6,7 @@ enum Direction {
 }
 
 type ClearKeyNavFunction = () => void;
-type Position = { x: number; y: number; };
+type Position = { x: number; y: number };
 type KeyName = KeyboardEvent["key"];
 
 type KeyNavSettings = {
@@ -17,26 +17,34 @@ type KeyNavSettings = {
  * Get all focusable elements in the document.
  */
 function getFocusableElements(): HTMLElement[] {
-  return Array.from(document.querySelectorAll<HTMLElement>(`
+  return Array.from(
+    document.querySelectorAll<HTMLElement>(`
     a[href],
     button,
     input,
     textarea,
     select,
     [tabindex]:not([tabindex="-1"])
-  `))
-    .filter(el => !el.hasAttribute("disabled"));
+  `),
+  ).filter((el) => !el.hasAttribute("disabled"));
 }
 
 function canUseDirection(el: HTMLElement, direction: Direction): boolean {
-  const flags = (el.dataset.keynav || "").split(/\s+/).map(f => f.toLowerCase());
+  const flags = (el.dataset.keynav || "")
+    .split(/\s+/)
+    .map((f) => f.toLowerCase());
 
   switch (direction) {
-    case Direction.UP: return !flags.includes("ignore-up");
-    case Direction.DOWN: return !flags.includes("ignore-down");
-    case Direction.LEFT: return !flags.includes("ignore-left");
-    case Direction.RIGHT: return !flags.includes("ignore-right");
-    default: return true;
+    case Direction.UP:
+      return !flags.includes("ignore-up");
+    case Direction.DOWN:
+      return !flags.includes("ignore-down");
+    case Direction.LEFT:
+      return !flags.includes("ignore-left");
+    case Direction.RIGHT:
+      return !flags.includes("ignore-right");
+    default:
+      return true;
   }
 }
 
@@ -68,10 +76,14 @@ function getCenter(el: HTMLElement): Position {
  * @param current - Currently focused element.
  * @param target - Candidate element to move focus to.
  * @param direction - Direction of intended movement.
- * 
+ *
  * @returns The distance (with penalty applied). Can return `Infinity` if `target` is not located in the intended `direction`.
  */
-function directionalDistance(current: HTMLElement, target: HTMLElement, direction: Direction): number {
+function directionalDistance(
+  current: HTMLElement,
+  target: HTMLElement,
+  direction: Direction,
+): number {
   const c = getCenter(current);
   const t = getCenter(target);
   const dx = t.x - c.x;
@@ -99,7 +111,9 @@ function directionalDistance(current: HTMLElement, target: HTMLElement, directio
   }
 
   const distance = Math.sqrt(dx * dx + dy * dy);
-  const anglePenalty = isVertical ? Math.abs(dx) / distance : Math.abs(dy) / distance;
+  const anglePenalty = isVertical
+    ? Math.abs(dx) / distance
+    : Math.abs(dy) / distance;
   return distance * (1 + anglePenalty);
 }
 
@@ -131,7 +145,12 @@ export function initKeyNav(settings: KeyNavSettings = {}): ClearKeyNavFunction {
     // List elements to consider focusing
     const focusable = getFocusableElements();
     const current = document.activeElement as HTMLElement | null;
-    if (!current || !focusable.includes(current) || !canUseDirection(current, direction)) return;
+    if (
+      !current ||
+      !focusable.includes(current) ||
+      !canUseDirection(current, direction)
+    )
+      return;
 
     // Search the next element to focus based on direction and distance
     let closest: HTMLElement | null = null;

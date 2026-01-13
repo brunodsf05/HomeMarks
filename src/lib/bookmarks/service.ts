@@ -26,26 +26,34 @@ export class BookmarkService implements IBookmarkService {
   }
 
   // ---- CRUD ----
-  public async createUrl(folderId: string, title: string, url: string): Promise<void> {
+  public async createUrl(
+    folderId: string,
+    title: string,
+    url: string,
+  ): Promise<void> {
     await this.create(folderId, title, url);
-  };
+  }
 
   public async createFolder(folderId: string, title: string): Promise<void> {
     await this.create(folderId, title);
   }
 
-  private async create(folderId: string, title: string, url?: string): Promise<void> {
+  private async create(
+    folderId: string,
+    title: string,
+    url?: string,
+  ): Promise<void> {
     // If the url is omitted, a folder will be created.
     await this.api.create({ parentId: folderId, title, url });
-  };
+  }
 
   public async update(id: string, title?: string, url?: string): Promise<void> {
     await this.api.update(id, { title, url });
-  };
+  }
 
   public async delete(id: string): Promise<void> {
     await this.api.removeTree(id);
-  };
+  }
 
   public async get(id: string): Promise<Bookmark> {
     const nodes = await this.api.getSubTree(id);
@@ -54,7 +62,7 @@ export class BookmarkService implements IBookmarkService {
       throw new Error(`Bookmark with id "${id}" not found`);
 
     return nodes[0] as unknown as Bookmark;
-  };
+  }
 
   public async getRoot(): Promise<Bookmark> {
     const nodes = await this.api.getTree();
@@ -63,16 +71,17 @@ export class BookmarkService implements IBookmarkService {
       throw new Error(`Root of the whole bookmark tree not found`);
 
     return nodes[0] as unknown as Bookmark;
-  };
+  }
 
   public async getWellKnown(type: WellKnownFolders): Promise<Bookmark> {
     switch (type) {
       case "bar":
-        if (!browser.isChrome)
-          return this.get("toolbar_____");
+        if (!browser.isChrome) return this.get("toolbar_____");
 
         // Search for chrome
-        const chromeBookmarksBar = (await this.getRoot()).children?.find(n => n.folderType === "bookmarks-bar") as Bookmark | undefined;
+        const chromeBookmarksBar = (await this.getRoot()).children?.find(
+          (n) => n.folderType === "bookmarks-bar",
+        ) as Bookmark | undefined;
 
         if (!chromeBookmarksBar)
           throw new Error("Bookmarks bar folder not found");
@@ -82,7 +91,7 @@ export class BookmarkService implements IBookmarkService {
       default:
         throw new Error(`Well-known folder of type "${type}" is not supported`);
     }
-  };
+  }
 
   // --- Utilities ---
   public isFolder(bookmark: Bookmark): boolean {
@@ -94,7 +103,8 @@ export class BookmarkService implements IBookmarkService {
     function findPath(parent: Bookmark, targetId: string): Bookmark[] | null {
       if (parent.id === targetId) return [parent]; // Target was found, stop searching
 
-      if (parent.children) { // Only explore children from folders
+      if (parent.children) {
+        // Only explore children from folders
         for (const child of parent.children) {
           const path = findPath(child, targetId);
           if (path) return [parent, ...path]; // Target was found in subtree, generate path from targetId to parent
@@ -107,7 +117,9 @@ export class BookmarkService implements IBookmarkService {
     // Get the youngest folder id or exit earlier for safety
     const isYoungestFolder = this.isFolder(youngest);
     if (!isYoungestFolder && youngest.parentId === undefined) return [];
-    const youngestFolderId: string = isYoungestFolder ? youngest.id : youngest.parentId!;
+    const youngestFolderId: string = isYoungestFolder
+      ? youngest.id
+      : youngest.parentId!;
 
     // Start DFS
     // TODO: Remove children from each bookmark to reduce memory usage. This requires updating BookmarkExplorer.PathBar behavior so it does not depend's of this function's returned array.
@@ -129,14 +141,12 @@ export class BookmarkService implements IBookmarkService {
     for (const child of folder.children) {
       if (this.isFolder(child)) {
         folders.push({ ...child, children: [] }); // Optimize memory
-      }
-      else {
+      } else {
         urls.push(child);
         timesUrl++;
       }
 
-      if (timesUrl >= limit)
-        break;
+      if (timesUrl >= limit) break;
     }
 
     // Combine with URLs first, folders after
@@ -151,7 +161,7 @@ export class BookmarkService implements IBookmarkService {
     let result: Bookmark = {
       id: `filtered-${Date.now()}`,
       title: "root",
-      children: []
+      children: [],
     };
 
     // Constraints
@@ -159,8 +169,7 @@ export class BookmarkService implements IBookmarkService {
       !this.isFolder(root) || // is url
       (root.children?.length ?? 0) === 0; // is childless
 
-    if (skipFilter)
-      return result;
+    if (skipFilter) return result;
 
     // Filtering
     // TODO: Mark bookmarks as wanted with some kind of metadata like extra.filter.wanted to add useful visual clues
@@ -171,18 +180,18 @@ export class BookmarkService implements IBookmarkService {
       const doesTitleMatch = filter.title?.test(node.title);
 
       if (isFolder) {
-        if (filter.title && doesTitleMatch && filter.type !== "url") return node; // TODO: Related to extra.filter, mark this folder as wanted
+        if (filter.title && doesTitleMatch && filter.type !== "url")
+          return node; // TODO: Related to extra.filter, mark this folder as wanted
 
         // Recursively apply filter to children
         const filteredChildren: Bookmark[] = (node.children ?? [])
-          .map(child => search(child))
+          .map((child) => search(child))
           .filter((child) => child !== undefined);
 
-        return (filteredChildren.length > 0)
+        return filteredChildren.length > 0
           ? { ...node, children: filteredChildren }
           : undefined;
-      }
-      else {
+      } else {
         // Discard if bookmark does not match filter's type
         if (filter.type === "folder") return undefined;
         if (filter.type === "url" && isFolder) return undefined;

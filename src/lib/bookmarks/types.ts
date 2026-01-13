@@ -97,7 +97,7 @@ export interface IBookmarkService {
   delete(id: string): Promise<void>;
   /**
    * Gets the bookmark or folder with the given id.
-   * 
+   *
    * @param id The bookmark to get. Beware that some folder ids (like "bookmarks-bar" folder type)
    *           change depending on the browser engine. (For Chrome it's "1", for Firefox "toolbar_____").
    *
@@ -114,7 +114,7 @@ export interface IBookmarkService {
    * Gets the well-known folder of the given type like "bookmarks bar".
    *
    * @param type The type of well-known folder to get.
-   * 
+   *
    * @returns A bookmark folder.
    */
   getWellKnown(type: WellKnownFolders): Promise<Bookmark>;
@@ -137,7 +137,7 @@ export interface IBookmarkService {
    * Reads a bookmark folder and returns its children sorted by type (urls first folder last).
    * This is useful when rendering the preview of a folder's children.
    * Said order will prioritize urls if there are the same or more ammount as limit.
-   * 
+   *
    * @param folder The bookmark folder to read it's children.
    * @returns The icons that should appear, array is trimmed so expect no children in folders.
    */

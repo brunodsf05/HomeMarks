@@ -10,8 +10,11 @@ interface BookmarkExplorerProps {
 
 const CLICK_DELAY = 150; // ms
 
-export const BookmarkExplorer: React.FC<BookmarkExplorerProps> = ({ rootBookmark }) => {
-  const [currentBookmark, setCurrentBookmark] = useState<Bookmark>(rootBookmark);
+export const BookmarkExplorer: React.FC<BookmarkExplorerProps> = ({
+  rootBookmark,
+}) => {
+  const [currentBookmark, setCurrentBookmark] =
+    useState<Bookmark>(rootBookmark);
   const [hasClicked, setHasClicked] = useState<boolean>(false);
 
   // Handlers
@@ -28,7 +31,7 @@ export const BookmarkExplorer: React.FC<BookmarkExplorerProps> = ({ rootBookmark
     setHasClicked(true);
 
     const executeWithDelay = async () => {
-      await new Promise(resolve => setTimeout(resolve, CLICK_DELAY));
+      await new Promise((resolve) => setTimeout(resolve, CLICK_DELAY));
 
       const isFolder = BookmarkService.getInstance().isFolder(b);
       (isFolder ? onBookmarkFolderClickHandler : onBookmarkUrlClickHandler)(b);
@@ -47,15 +50,13 @@ export const BookmarkExplorer: React.FC<BookmarkExplorerProps> = ({ rootBookmark
         onFolderClick={onBookmarkFolderClickHandler}
       />
       <div className={styles.clickableContainer}>
-        {
-          currentBookmark?.children?.map((b) =>
-            <BookmarkClickable
-              key={b.id}
-              bookmark={b}
-              onClick={onBookmarkClickHandler}
-            />
-          )
-        }
+        {currentBookmark?.children?.map((b) => (
+          <BookmarkClickable
+            key={b.id}
+            bookmark={b}
+            onClick={onBookmarkClickHandler}
+          />
+        ))}
       </div>
     </div>
   );

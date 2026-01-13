@@ -5,7 +5,10 @@ import { type FaviconProps } from "./_types";
 /**
  * This checks if a favicon downloaded via `https://t2.gstatic.com/faviconV2`
  */
-function isOnlineFaviconPlaceholder(img: HTMLImageElement, targetSize: favicon.Sizes): boolean {
+function isOnlineFaviconPlaceholder(
+  img: HTMLImageElement,
+  targetSize: favicon.Sizes,
+): boolean {
   const imgSize: number = img.naturalWidth;
   return imgSize < targetSize && imgSize === favicon.sizePlaceholderT2GStatic;
 }
@@ -17,8 +20,15 @@ function isOnlineFaviconPlaceholder(img: HTMLImageElement, targetSize: favicon.S
  * @param size The size of the favicon to display (default is 16).
  * @param onImageSourceUpdate Executed when the image loads, either successfully or when the fallback image is used.
  */
-export const Favicon: React.FC<FaviconProps> = ({ url, size, onImageSourceUpdate, ...rest }) => {
-  const [faviconUrl, setFaviconUrl] = useState<string>(favicon.getUrlOnline(url, size));
+export const Favicon: React.FC<FaviconProps> = ({
+  url,
+  size,
+  onImageSourceUpdate,
+  ...rest
+}) => {
+  const [faviconUrl, setFaviconUrl] = useState<string>(
+    favicon.getUrlOnline(url, size),
+  );
   const [isUsingFallback, setIsUsingFallback] = useState<boolean>(false);
 
   const handleLoad: React.ReactEventHandler<HTMLImageElement> = (event) => {
@@ -31,7 +41,9 @@ export const Favicon: React.FC<FaviconProps> = ({ url, size, onImageSourceUpdate
 
     // Image search failed
     if (isOnlineFaviconPlaceholder(img, size) && true) {
-      setFaviconUrl("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII"); // TODO: Load/generate it from somewhere
+      setFaviconUrl(
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
+      ); // TODO: Load/generate it from somewhere
       setIsUsingFallback(true);
     }
   };

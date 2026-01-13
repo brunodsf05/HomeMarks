@@ -10,25 +10,25 @@ interface, designed to access everything instantly.
 
 ## Features
 
-* No configuration needed... HomeMarks will always load your browser bookmarks!
-* Clean and minimalist interface.
-* Fast navigation using either keyboard or mouse.
-* Search bar to find bookmarks or perform web searches.
-* Compatible with multiple browsers.
+- No configuration needed... HomeMarks will always load your browser bookmarks!
+- Clean and minimalist interface.
+- Fast navigation using either keyboard or mouse.
+- Search bar to find bookmarks or perform web searches.
+- Compatible with multiple browsers.
 
 > [!WARNING]
 > This project is still under development. Firefox is not supported yet. At the
-moment, HomeMarks shows your bookmarks, allows filtering, and enables web
-searches.
+> moment, HomeMarks shows your bookmarks, allows filtering, and enables web
+> searches.
 
 ## Project status
 
-* [x] Load browser bookmarks
-* [x] Integrated search
-* [ ] Firefox compatibility
-* [ ] Edit bookmarks (rename, create, delete, and move)
-* [ ] Reload bookmarks when they are updated, i.e., if the user uses the
-browser’s bookmarks bar
+- [x] Load browser bookmarks
+- [x] Integrated search
+- [ ] Firefox compatibility
+- [ ] Edit bookmarks (rename, create, delete, and move)
+- [ ] Reload bookmarks when they are updated, i.e., if the user uses the
+      browser’s bookmarks bar
 
 ## Development
 

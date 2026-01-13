@@ -27,9 +27,6 @@ export const DelayedInput: React.FC<DelayedInputProps> = ({
   }, [query]);
 
   return (
-    <input
-      {...inputProps}
-      onChange={(e) => setQuery(e.target.value.trim())}
-    />
+    <input {...inputProps} onChange={(e) => setQuery(e.target.value.trim())} />
   );
 };

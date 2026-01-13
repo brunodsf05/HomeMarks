@@ -16,7 +16,8 @@ const App = () => {
   const [bookmarks, setBookmarks] = useState<Bookmark>();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchQueryDelayed, setSearchQueryDelayed] = useState<string>("");
-  const [keyboardHints, setKeyboardHints] = useState<KeyboardHintsContext>("search.empty");
+  const [keyboardHints, setKeyboardHints] =
+    useState<KeyboardHintsContext>("search.empty");
 
   const refInput = useRef<HTMLInputElement>(null);
 
@@ -84,4 +85,4 @@ const App = () => {
   );
 };
 
-export default App;;
+export default App;

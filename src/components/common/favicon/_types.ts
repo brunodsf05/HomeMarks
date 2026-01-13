@@ -20,7 +20,7 @@ interface FaviconBoxClassNames {
   container?: string;
   background?: string;
   icon?: string;
-};
+}
 
 /**
  * A component that displays the favicon for a given URL inside a box thats the same image.

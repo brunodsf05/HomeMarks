@@ -1,6 +1,8 @@
 :root {
   --folder-cols: 2;
-  --size-favicon-clickable-small: calc(var(--size-favicon-clickable) / var(--folder-cols));
+  --size-favicon-clickable-small: calc(
+    var(--size-favicon-clickable) / var(--folder-cols)
+  );
   --size-border: 0.1rem;
   --radius: 2rem;
   --favicon-radius: 1rem;
