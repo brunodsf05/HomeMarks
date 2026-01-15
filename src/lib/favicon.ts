@@ -34,6 +34,7 @@ export const getUrlOnline: FaviconGetter = (url: string, size: Sizes) =>
  * Generates URL that can be used to fetch favicons locally without a connection.
  */
 export const getUrlLocally: FaviconGetter = (url: string, size: Sizes) => {
+  // TODO: Find Firefox-compatible approach
   const favicon = new URL(
     (globalThis as any).chrome.runtime.getURL("/_favicon/")
   );

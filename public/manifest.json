@@ -3,7 +3,7 @@
   "name": "HomeMarks",
   "version": "0",
   "description": "A bookmarks launcher/manager.",
-  "permissions": ["search", "bookmarks"],
+  "permissions": ["search", "bookmarks", "favicon"],
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

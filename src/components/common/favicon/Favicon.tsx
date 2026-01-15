@@ -7,7 +7,7 @@ import { type FaviconProps } from "./_types";
  */
 function isOnlineFaviconPlaceholder(
   img: HTMLImageElement,
-  targetSize: favicon.Sizes,
+  targetSize: favicon.Sizes
 ): boolean {
   const imgSize: number = img.naturalWidth;
   return imgSize < targetSize && imgSize === favicon.sizePlaceholderT2GStatic;
@@ -27,7 +27,7 @@ export const Favicon: React.FC<FaviconProps> = ({
   ...rest
 }) => {
   const [faviconUrl, setFaviconUrl] = useState<string>(
-    favicon.getUrlOnline(url, size),
+    favicon.getUrl(url, size)
   );
   const [isUsingFallback, setIsUsingFallback] = useState<boolean>(false);
 
@@ -42,7 +42,7 @@ export const Favicon: React.FC<FaviconProps> = ({
     // Image search failed
     if (isOnlineFaviconPlaceholder(img, size) && true) {
       setFaviconUrl(
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII",
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII"
       ); // TODO: Load/generate it from somewhere
       setIsUsingFallback(true);
     }
