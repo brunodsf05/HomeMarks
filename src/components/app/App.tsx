@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { WebSearchService } from "@/lib/websearch";
 import { initKeyNav } from "@/lib/keynav";
-import { exampleBookmark } from "@/globals.d"; // TODO: Remove
 
 import { DelayedInput } from "@/components/common/DelayedInput";
 

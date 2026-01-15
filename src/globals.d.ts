@@ -2,8 +2,7 @@ declare const __BROWSER__: "chrome" | "firefox";
 declare const __IS_EXTENSION__: boolean;
 
 // TODO: Temporal mockup data
-import { type Bookmark } from "@/lib/bookmarks";
-export const exampleBookmark: Bookmark = {
+declare const exampleBookmark = {
   id: "1",
   title: "Marcadores",
   folderType: "folder",
