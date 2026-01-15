@@ -12,7 +12,9 @@ const encode = encodeURIComponent;
  * Generates URL that can be used to fetch favicons via Google's `t2.gstatic.com/faviconV2` service.
  */
 export const getUrlFromT2GStatic: FaviconGetter = (url: string, size: Sizes) =>
-  `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${encode(url)}&size=${size}`;
+  `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${encode(
+    url
+  )}&size=${size}`;
 
 /**
  * Generates URL that can be used to fetch favicons via an external service.
