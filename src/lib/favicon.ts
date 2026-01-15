@@ -9,6 +9,14 @@ const encode = encodeURIComponent;
 
 /// --- FAVICON GETTERS ---
 /**
+ * Generates URL that can be used to fetch favicons.
+ */
+export const getUrl: FaviconGetter = (url: string, size: Sizes) =>
+  __RUNTIME__ === "extension.chrome"
+    ? getUrlLocally(url, size)
+    : getUrlOnline(url, size);
+
+/**
  * Generates URL that can be used to fetch favicons via Google's `t2.gstatic.com/faviconV2` service.
  */
 export const getUrlFromT2GStatic: FaviconGetter = (url: string, size: Sizes) =>
@@ -26,7 +34,9 @@ export const getUrlOnline: FaviconGetter = (url: string, size: Sizes) =>
  * Generates URL that can be used to fetch favicons locally without a connection.
  */
 export const getUrlLocally: FaviconGetter = (url: string, size: Sizes) => {
-  const favicon = new URL(chrome.runtime.getURL("/_favicon/"));
+  const favicon = new URL(
+    (globalThis as any).chrome.runtime.getURL("/_favicon/")
+  );
   favicon.searchParams.set("pageUrl", url);
   favicon.searchParams.set("size", `${size}`);
   return favicon.toString();
