@@ -29,7 +29,7 @@ export class BookmarkService implements IBookmarkService {
   public async createUrl(
     folderId: string,
     title: string,
-    url: string,
+    url: string
   ): Promise<void> {
     await this.create(folderId, title, url);
   }
@@ -41,7 +41,7 @@ export class BookmarkService implements IBookmarkService {
   private async create(
     folderId: string,
     title: string,
-    url?: string,
+    url?: string
   ): Promise<void> {
     // If the url is omitted, a folder will be created.
     await this.api.create({ parentId: folderId, title, url });
@@ -76,11 +76,12 @@ export class BookmarkService implements IBookmarkService {
   public async getWellKnown(type: WellKnownFolders): Promise<Bookmark> {
     switch (type) {
       case "bar":
-        if (!browser.isChrome) return this.get("toolbar_____");
+        if (__RUNTIME__ === "extension.firefox")
+          return this.get("toolbar_____");
 
         // Search for chrome
         const chromeBookmarksBar = (await this.getRoot()).children?.find(
-          (n) => n.folderType === "bookmarks-bar",
+          (n) => n.folderType === "bookmarks-bar"
         ) as Bookmark | undefined;
 
         if (!chromeBookmarksBar)
