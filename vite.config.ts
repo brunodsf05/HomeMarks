@@ -2,21 +2,48 @@ import { defineConfig } from "vite";
 import path from "path"; // From @types/node
 import react from "@vitejs/plugin-react-swc";
 
+const VALID_RUNTIMES = [
+  "web",
+  "extension.chrome",
+  "extension.firefox",
+] as const;
+
+type Runtime = (typeof VALID_RUNTIMES)[number];
+
+function getValidRuntime(
+  checkedRuntime: string | undefined,
+  isCommandBuild: boolean
+): Runtime {
+  if (checkedRuntime === undefined) return "web";
+
+  const runtime = checkedRuntime as Runtime;
+
+  if (!VALID_RUNTIMES.includes(runtime))
+    throw new Error(
+      `Invalid runtime "${checkedRuntime}". ` +
+        `Valid values are: ${VALID_RUNTIMES.join(", ")}.`
+    );
+
+  if (!isCommandBuild && runtime !== "web")
+    throw new Error(
+      `Runtime "${runtime}" cannot be used with "vite dev". ` +
+        `Extension APIs are not available in dev mode. ` +
+        `Use runtime "web" or run "vite build" instead.`
+    );
+  return runtime;
+}
+
 // https://vite.dev/config/
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ command }) => {
   // Per-browser builds
   // TODO: Improve builds by storing each build inside a folder with the browser's name
-  const browser = mode === "firefox" ? "firefox" : "chrome";
-  const isExtension =
-    command === "build" && process.env.IS_EXTENSION === "true";
-
-  console.log({ isExtension });
+  const runtime = getValidRuntime(process.env.RUNTIME, command === "build");
+  console.log({ runtime });
 
   return {
     plugins: [react()],
     define: {
-      __BROWSER__: JSON.stringify(browser),
-      __IS_EXTENSION__: JSON.stringify(process.env.IS_EXTENSION === "true"),
+      __RUNTIME__: JSON.stringify(runtime),
     },
     resolve: {
       alias: {

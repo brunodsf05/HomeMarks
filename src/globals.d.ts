@@ -1,5 +1,4 @@
-declare const __BROWSER__: "chrome" | "firefox";
-declare const __IS_EXTENSION__: boolean;
+declare const __RUNTIME__: "web" | "extension.chrome" | "extension.firefox";
 
 // TODO: Temporal mockup data
 declare const exampleBookmark = {

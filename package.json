@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:extension": "cross-env-shell IS_EXTENSION=true \"tsc -b && vite build\"",
+    "build:extension.chrome": "cross-env-shell RUNTIME=\"extension.chrome\" \"tsc -b && vite build\"",
+    "build:extension.firefox": "cross-env-shell RUNTIME=\"extension.firefox\" \"tsc -b && vite build\"",
     "lint": "eslint .",
     "preview": "vite preview"
   },
