@@ -1,4 +1,5 @@
-import browser from "@/lib/browser_api";
+import browser from "webextension-polyfill";
+
 import type { IWebSearchService } from "./types";
 
 /**
@@ -7,11 +8,6 @@ import type { IWebSearchService } from "./types";
  */
 export class WebSearchService implements IWebSearchService {
   private static instance: WebSearchService;
-  private api: typeof browser.api.search;
-
-  private constructor() {
-    this.api = browser.api.search;
-  }
 
   public static getInstance(): WebSearchService {
     if (!WebSearchService.instance)
@@ -21,7 +17,7 @@ export class WebSearchService implements IWebSearchService {
   }
 
   public search(text: string): void {
-    this.api.query({
+    browser.search.query({
       text: text,
     });
   }
