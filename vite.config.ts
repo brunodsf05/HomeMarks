@@ -40,6 +40,16 @@ export default defineConfig(({ command }) => {
   const runtime = getValidRuntime(process.env.RUNTIME, command === "build");
   console.log({ runtime });
 
+  const webExtensionPolyfillPatch =
+    runtime === "web"
+      ? {
+          "webextension-polyfill": path.resolve(
+            __dirname,
+            "src/mock/webextension-polyfill.ts"
+          ),
+        }
+      : {};
+
   return {
     plugins: [react()],
     define: {
@@ -48,6 +58,7 @@ export default defineConfig(({ command }) => {
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "src"),
+        ...webExtensionPolyfillPatch,
       },
     },
   };
