@@ -6,6 +6,8 @@ import { initKeyNav } from "@/lib/keynav";
 
 import { DelayedInput } from "@/components/common/DelayedInput";
 
+import { exampleBookmark } from "@/mock/bookmarks";
+
 import { KeyboardHints, type KeyboardHintsContext } from "./_KeyboardHints";
 import { SearchResult } from "./_SearchResults";
 
@@ -23,7 +25,7 @@ const App = () => {
   // Load users bookmarks
   useEffect(() => {
     // TODO: Remove this "if" and keep "else", just for testing
-    if (import.meta.env.DEV) {
+    if (__RUNTIME__ === "web") {
       setBookmarks(exampleBookmark);
       return;
     }
