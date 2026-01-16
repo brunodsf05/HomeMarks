@@ -1,4 +1,4 @@
-import { defineConfig } from "vite";
+import { defineConfig, type AliasOptions } from "vite";
 import path from "path"; // From @types/node
 import react from "@vitejs/plugin-react-swc";
 
@@ -59,7 +59,7 @@ export default defineConfig(({ command }) => {
       alias: {
         "@": path.resolve(__dirname, "src"),
         ...webExtensionPolyfillPatch,
-      },
+      } as AliasOptions,
     },
   };
 });
