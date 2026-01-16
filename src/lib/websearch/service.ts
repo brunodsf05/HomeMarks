@@ -3,8 +3,7 @@ import browser from "webextension-polyfill";
 import type { IWebSearchService } from "./types";
 
 /**
- * Singleton service to manage bookmarks. Attempts to abstract the underlying browser API for both
- * Chrome and Firefox engines.
+ * Executes a web search using the user's search engine.
  */
 export class WebSearchService implements IWebSearchService {
   private static instance: WebSearchService;
