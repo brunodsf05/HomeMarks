@@ -1,4 +1,5 @@
-import browser from "@/lib/browser_api";
+import browser from "webextension-polyfill";
+
 import type {
   Bookmark,
   WellKnownFolders,
@@ -12,10 +13,10 @@ import type {
  */
 export class BookmarkService implements IBookmarkService {
   private static instance: BookmarkService;
-  private api: typeof browser.api.bookmarks;
+  private api: typeof browser.bookmarks;
 
   private constructor() {
-    this.api = browser.api.bookmarks;
+    this.api = browser.bookmarks;
   }
 
   public static getInstance(): BookmarkService {

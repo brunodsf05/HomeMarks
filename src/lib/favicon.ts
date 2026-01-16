@@ -1,5 +1,3 @@
-// import browserApi from "./browser_api";
-
 export type Sizes = 8 | 16 | 32 | 64 | 128;
 export const sizePlaceholderT2GStatic: Sizes = 16;
 type FaviconGetter = (url: string, size: Sizes) => string;
