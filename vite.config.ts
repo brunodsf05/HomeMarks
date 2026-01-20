@@ -1,5 +1,5 @@
 import { defineConfig, type AliasOptions } from "vite";
-import path from "path"; // From @types/node
+import path from "path";
 import react from "@vitejs/plugin-react-swc";
 
 const VALID_RUNTIMES = [
