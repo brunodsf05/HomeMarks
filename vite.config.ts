@@ -1,6 +1,7 @@
 import { defineConfig, type AliasOptions } from "vite";
 import path from "path";
 import react from "@vitejs/plugin-react-swc";
+import tailwindcss from "@tailwindcss/vite";
 
 const VALID_RUNTIMES = [
   "web",
@@ -51,7 +52,7 @@ export default defineConfig(({ command }) => {
       : {};
 
   return {
-    plugins: [react()],
+    plugins: [react(), tailwindcss()],
     define: {
       __RUNTIME__: JSON.stringify(runtime),
     },
