@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { type Bookmark, BookmarkService } from "@/lib/bookmarks";
 import { WebSearchService } from "@/lib/websearch";
-import { initKeyNav } from "@/lib/keynav";
+// import { initKeyNav } from "@/lib/keynav";
 
 import { DelayedInput } from "@/components/common/DelayedInput";
 
@@ -37,6 +37,7 @@ const App = () => {
   }, []);
 
   // Init input manager
+  /*
   useEffect(() => {
     const clearKeyNav = initKeyNav();
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -52,6 +53,7 @@ const App = () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+  */
 
   return (
     <main className={styles.this}>
