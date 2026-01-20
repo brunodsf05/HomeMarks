@@ -62,11 +62,7 @@ export default defineConfig(({ command }) => {
       } as AliasOptions,
     },
     build: {
-      outDir: path.resolve(
-        __dirname,
-        "dist",
-        runtime.replace("extension.", ""),
-      ),
+      outDir: path.resolve(__dirname, "dist", runtime),
       emptyOutDir: true, // Clears directory before building
     },
   };
