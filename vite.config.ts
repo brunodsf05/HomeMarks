@@ -12,7 +12,7 @@ type Runtime = (typeof VALID_RUNTIMES)[number];
 
 function getValidRuntime(
   checkedRuntime: string | undefined,
-  isCommandBuild: boolean
+  isCommandBuild: boolean,
 ): Runtime {
   if (checkedRuntime === undefined) return "web";
 
@@ -21,14 +21,14 @@ function getValidRuntime(
   if (!VALID_RUNTIMES.includes(runtime))
     throw new Error(
       `Invalid runtime "${checkedRuntime}". ` +
-        `Valid values are: ${VALID_RUNTIMES.join(", ")}.`
+        `Valid values are: ${VALID_RUNTIMES.join(", ")}.`,
     );
 
   if (!isCommandBuild && runtime !== "web")
     throw new Error(
       `Runtime "${runtime}" cannot be used with "vite dev". ` +
         `Extension APIs are not available in dev mode. ` +
-        `Use runtime "web" or run "vite build" instead.`
+        `Use runtime "web" or run "vite build" instead.`,
     );
   return runtime;
 }
@@ -45,7 +45,7 @@ export default defineConfig(({ command }) => {
       ? {
           "webextension-polyfill": path.resolve(
             __dirname,
-            "src/mock/webextension-polyfill.ts"
+            "src/mock/webextension-polyfill.ts",
           ),
         }
       : {};
