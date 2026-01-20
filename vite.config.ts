@@ -61,5 +61,13 @@ export default defineConfig(({ command }) => {
         ...webExtensionPolyfillPatch,
       } as AliasOptions,
     },
+    build: {
+      outDir: path.resolve(
+        __dirname,
+        "dist",
+        runtime.replace("extension.", ""),
+      ),
+      emptyOutDir: true, // Clears directory before building
+    },
   };
 });
