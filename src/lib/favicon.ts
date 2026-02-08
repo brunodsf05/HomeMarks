@@ -19,7 +19,7 @@ export const getUrl: FaviconGetter = (url: string, size: Sizes) =>
  */
 export const getUrlFromT2GStatic: FaviconGetter = (url: string, size: Sizes) =>
   `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${encode(
-    url
+    url,
   )}&size=${size}`;
 
 /**
@@ -34,7 +34,7 @@ export const getUrlOnline: FaviconGetter = (url: string, size: Sizes) =>
 export const getUrlLocally: FaviconGetter = (url: string, size: Sizes) => {
   // TODO: Find Firefox-compatible approach
   const favicon = new URL(
-    (globalThis as any).chrome.runtime.getURL("/_favicon/")
+    (globalThis as any).chrome.runtime.getURL("/_favicon/"),
   );
   favicon.searchParams.set("pageUrl", url);
   favicon.searchParams.set("size", `${size}`);

@@ -18,7 +18,7 @@ export class WebSearchService implements IWebSearchService {
   public search(text: string): void {
     if (__RUNTIME__ === "web")
       alert(
-        "Web search is only available when HomeMarks is run as an extension."
+        "Web search is only available when HomeMarks is run as an extension.",
       );
     else
       browser.search.query({
