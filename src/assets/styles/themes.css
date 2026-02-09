@@ -1,0 +1,12 @@
+:root,
+:root[data-theme="dark"] {
+  --g-bg: #223;
+  --g-bg-button: #446;
+  --g-fg: #eef;
+}
+
+:root[data-theme="light"] {
+  --g-bg: #ffd;
+  --g-bg-button: #997;
+  --g-fg: #001;
+}

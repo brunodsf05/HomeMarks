@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "@/global.css";
 import Home from "@/pages/Home";
+import { ThemeProvider } from "./contexts/theme";
 
 // TODO: Load this if user wants to
 // Steals focus from browser focus bar
@@ -13,6 +14,8 @@ if (window.location.search !== "?x") {
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Home />
+    <ThemeProvider>
+      <Home />
+    </ThemeProvider>
   </StrictMode>,
 );
