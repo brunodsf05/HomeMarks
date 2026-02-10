@@ -12,6 +12,20 @@ const Home: React.FC = () => {
     "User configuration\nPreferences that must be remembered like which language to use, the theme, etc...",
   ];
 
+  const switchTheme = () => {
+    setThemePreference((prev) => {
+      const isUsingFirstTheme = prev.themes.light.id === "light";
+
+      return {
+        ...prev,
+        themes: {
+          light: { id: isUsingFirstTheme ? "light2" : "light" },
+          dark: { id: isUsingFirstTheme ? "dark2" : "dark" },
+        },
+      };
+    });
+  };
+
   const switchThemePolarity = () => {
     setThemePreference((prev) => ({
       ...prev,
@@ -31,6 +45,7 @@ const Home: React.FC = () => {
             : "dark"}{" "}
         theme
       </button>
+      <button onClick={switchTheme}>Switch theme</button>
       <ul>
         {tasks
           .map((task) => task.split("\n"))

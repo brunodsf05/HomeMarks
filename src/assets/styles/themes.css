@@ -10,3 +10,15 @@
   --g-bg-button: #997;
   --g-fg: #001;
 }
+
+:root[data-theme="dark2"] {
+  --g-bg: #000;
+  --g-bg-button: #777;
+  --g-fg: #fff;
+}
+
+:root[data-theme="light2"] {
+  --g-bg: #fff;
+  --g-bg-button: #888;
+  --g-fg: #000;
+}
