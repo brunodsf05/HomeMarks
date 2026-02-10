@@ -3,7 +3,7 @@ import type { Theme } from "./types";
 
 export interface ThemeContextValue {
   theme: Theme;
-  setTheme: (theme: Theme) => void;
+  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
 }
 
 export const ThemeContext = createContext<ThemeContextValue | undefined>(
