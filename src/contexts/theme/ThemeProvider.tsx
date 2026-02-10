@@ -1,30 +1,50 @@
 import { useEffect, useState } from "react";
-import { defaultTheme, type Theme } from "./types";
+import { type ThemePreferences } from "./types";
 import { ThemeContext, type ThemeContextValue } from "./context";
-import { loadTheme, saveTheme } from "./persistence";
+import { loadThemePreference, saveThemePreference } from "./persistence";
 import { applyTheme } from "./dom";
+
+// TEMP
+const defaultThemePreferences: ThemePreferences = {
+  polarity: "auto",
+  themes: {
+    dark: { id: "dark" },
+    light: { id: "light" },
+  },
+};
 
 /**
  * Context provider that manages the application theme.
  *
- * - The initial value of `theme` is the result of {@link loadTheme}.
- *   If no theme is found, it falls back to {@link defaultTheme}.
+ * - The state is {@link ThemePreferences}.
+ * - The initial value of `themePreference` is the result of
+ *   {@link loadThemePreference}.
+ *   If no theme is found, it falls back to a TODO: default.
  * - Applies the active theme to the document root using {@link applyTheme}.
- * - Persists theme changes using {@link saveTheme}.
+ * - Persists preference changes using {@link saveThemePreference}.
  */
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    return loadTheme() ?? defaultTheme;
-  });
+  const [themePreferences, setThemePreferences] = useState<ThemePreferences>(
+    () => {
+      return loadThemePreference() ?? defaultThemePreferences;
+    },
+  );
 
   useEffect(() => {
+    saveThemePreference(themePreferences);
+
+    // TODO: Support polarity "auto" by detecting current polarity of OS
+    const theme =
+      themePreferences.polarity === "dark"
+        ? themePreferences.themes.dark
+        : themePreferences.themes.light;
+
     applyTheme(theme);
-    saveTheme(theme);
-  }, [theme]);
+  }, [themePreferences]);
 
   const value: ThemeContextValue = {
-    theme: theme,
-    setTheme: setTheme,
+    themePreferences: themePreferences,
+    setThemePreferences: setThemePreferences,
   };
 
   return (

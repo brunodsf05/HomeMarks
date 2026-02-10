@@ -13,5 +13,5 @@ import { type Theme } from "./types";
  */
 export function applyTheme(theme: Theme) {
   console.log("Updating the theme...", theme);
-  document.documentElement.dataset.theme = theme.name;
+  document.documentElement.dataset.theme = theme.id;
 }

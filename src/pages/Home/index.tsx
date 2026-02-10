@@ -1,7 +1,10 @@
 import { useTheme } from "@/contexts/theme";
 
 const Home: React.FC = () => {
-  const { theme, setTheme } = useTheme();
+  const {
+    themePreferences: themePreference,
+    setThemePreferences: setThemePreference,
+  } = useTheme();
 
   const tasks = [
     "Themes\nProvide a minimal dark and light theme.\nExtend it to recoloring (e.g. dark theme with red tint).\nAnd finally all the style (fonts, roundness, spacing, etc...)",
@@ -9,16 +12,25 @@ const Home: React.FC = () => {
     "User configuration\nPreferences that must be remembered like which language to use, the theme, etc...",
   ];
 
-  const switchTheme = () => {
-    setTheme({
-      name: theme.name === "dark" ? "light" : "dark",
-    });
+  const switchThemePolarity = () => {
+    setThemePreference((prev) => ({
+      ...prev,
+      polarity: prev.polarity === "dark" ? "light" : "dark",
+    }));
   };
 
   return (
     <>
       <h1>Things to do:</h1>
-      <button onClick={switchTheme}>Toggle theme</button>
+      <button onClick={switchThemePolarity}>
+        Switch to{" "}
+        {themePreference.polarity === "auto"
+          ? "auto"
+          : themePreference.polarity === "dark"
+            ? "light"
+            : "dark"}{" "}
+        theme
+      </button>
       <ul>
         {tasks
           .map((task) => task.split("\n"))

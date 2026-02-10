@@ -1,9 +1,9 @@
 import { createContext, useContext } from "react";
-import type { Theme } from "./types";
+import type { ThemePreferences } from "./types";
 
 export interface ThemeContextValue {
-  theme: Theme;
-  setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+  themePreferences: ThemePreferences;
+  setThemePreferences: React.Dispatch<React.SetStateAction<ThemePreferences>>;
 }
 
 export const ThemeContext = createContext<ThemeContextValue | undefined>(
