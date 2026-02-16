@@ -15,7 +15,18 @@ export function applyTheme(theme: Theme) {
   document.documentElement.style.background = "";
   console.log("Updating the theme...", theme);
   document.documentElement.dataset.theme = theme.id;
+  cacheSaveStyleBackground();
+}
+
+/**
+ * Reads the current `background` style of the `<body/>` and saves it in
+ * {@link localStorage}.
+ *
+ * If you go to `/src/index.html` you will see a script tag that loads the
+ * style before the first render.
+ */
+function cacheSaveStyleBackground() {
+  const STORAGE_KEY = "CacheStyleBackground";
   const bg = getComputedStyle(document.body).background;
-  localStorage.setItem("bg-cache", bg);
-  console.log(bg);
+  localStorage.setItem(STORAGE_KEY, bg);
 }
