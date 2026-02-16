@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { type ThemePreferences } from "./types";
 import { ThemeContext, type ThemeContextValue } from "./context";
 import { loadThemePreference, saveThemePreference } from "./persistence";
-import { applyTheme } from "./dom";
+import { applyTheme, getThemePolarity, onThemePolaritySwitch } from "./dom";
 
 // TEMP
 const defaultThemePreferences: ThemePreferences = {
@@ -31,16 +31,33 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     },
   );
 
+  // Subscribe to OS polarity switches when needed
   useEffect(() => {
-    saveThemePreference(themePreferences);
+    if (!themePreferences.isPolarityAuto) return;
 
-    // TODO: Support polarity "auto" by detecting current polarity of OS
-    const theme =
-      themePreferences.polarity === "dark"
-        ? themePreferences.themes.dark
-        : themePreferences.themes.light;
+    return onThemePolaritySwitch((polarity) => {
+      setThemePreferences((prev) => ({ ...prev, polarity }));
+    });
+  }, [themePreferences.isPolarityAuto]);
 
-    applyTheme(theme);
+  // Sync the DOM style with themePreferences
+  // Ensure correct polarity when it is set to automatic
+  useEffect(() => {
+    const osPolarity = getThemePolarity();
+
+    const syncPolarityWithOS =
+      themePreferences.isPolarityAuto &&
+      themePreferences.polarity !== osPolarity;
+
+    if (syncPolarityWithOS) {
+      setThemePreferences((prev) => ({
+        ...prev,
+        polarity: osPolarity,
+      }));
+    } else {
+      saveThemePreference(themePreferences);
+      applyTheme(themePreferences.themes[themePreferences.polarity]);
+    }
   }, [themePreferences]);
 
   const value: ThemeContextValue = {

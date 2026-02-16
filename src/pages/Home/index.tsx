@@ -27,23 +27,34 @@ const Home: React.FC = () => {
   };
 
   const switchThemePolarity = () => {
-    setThemePreference((prev) => ({
-      ...prev,
-      polarity: prev.polarity === "dark" ? "light" : "dark",
-    }));
+    setThemePreference((prev) => {
+      if (prev.isPolarityAuto)
+        return {
+          ...prev,
+          polarity: "dark",
+          isPolarityAuto: false,
+        };
+
+      if (prev.polarity === "dark")
+        return {
+          ...prev,
+          polarity: "light",
+          isPolarityAuto: false,
+        };
+
+      return {
+        ...prev,
+        isPolarityAuto: true,
+      };
+    });
   };
 
   return (
     <>
       <h1>Things to do:</h1>
       <button onClick={switchThemePolarity}>
-        Switch to{" "}
-        {themePreference.polarity === "auto"
-          ? "auto"
-          : themePreference.polarity === "dark"
-            ? "light"
-            : "dark"}{" "}
-        theme
+        Change theme (Polarity is {themePreference.polarity}
+        {themePreference.isPolarityAuto && " from the OS"})
       </button>
       <button onClick={switchTheme}>Switch theme</button>
       <ul>
