@@ -3,15 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
-    <script>
-      // This block of code is executed before the first render of the page.
-
-      // Avoid FOUC. (https://en.wikipedia.org/wiki/Flash_of_unstyled_content)
-      try {
-        const bg = localStorage.getItem("CacheStyleBackground");
-        if (bg) document.documentElement.style.background = bg;
-      } catch {}
-    </script>
+    <!-- This block of code is executed before the first render of the page -->
+    <script src="/bootstrap.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HomeMarks</title>
   </head>
