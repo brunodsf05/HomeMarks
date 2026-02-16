@@ -12,6 +12,10 @@ import { type Theme } from "./types";
  * @param theme - The theme to apply.
  */
 export function applyTheme(theme: Theme) {
+  document.documentElement.style.background = "";
   console.log("Updating the theme...", theme);
   document.documentElement.dataset.theme = theme.id;
+  const bg = getComputedStyle(document.body).background;
+  localStorage.setItem("bg-cache", bg);
+  console.log(bg);
 }
