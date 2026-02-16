@@ -6,7 +6,8 @@ import { applyTheme } from "./dom";
 
 // TEMP
 const defaultThemePreferences: ThemePreferences = {
-  polarity: "auto",
+  polarity: "dark",
+  isPolarityAuto: false,
   themes: {
     dark: { id: "dark" },
     light: { id: "light" },

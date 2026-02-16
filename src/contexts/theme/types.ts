@@ -11,7 +11,8 @@ export type Theme = {
 export type ThemePolarity = "dark" | "light";
 
 export type ThemePreferences = {
-  polarity: ThemePolarity | "auto";
+  polarity: ThemePolarity;
+  isPolarityAuto: boolean;
   themes: Record<ThemePolarity, Theme>;
 };
 
@@ -25,9 +26,14 @@ export function isThemePreferences(value: unknown) {
 
   // Validate polarity
   const polarity = v.polarity;
-  if (polarity !== "dark" && polarity !== "light" && polarity !== "auto") {
+  if (polarity !== "dark" && polarity !== "light") {
     return false;
   }
+
+  // Validate isPolarityAuto
+  const isPolarityAuto = v.isPolarityAuto;
+  if (typeof isPolarityAuto !== "boolean" || isPolarityAuto === null)
+    return false;
 
   // Validate themes object
   const themes = v.themes;
