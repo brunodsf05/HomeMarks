@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
     <script>
+      // This block of code is executed before the first render of the page.
+
+      // Avoid FOUC. (https://en.wikipedia.org/wiki/Flash_of_unstyled_content)
       try {
         const bg = localStorage.getItem("bg-cache");
         console.log("bg", bg);
