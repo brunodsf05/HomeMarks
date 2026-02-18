@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "@/global.css";
 import Home from "@/pages/Home";
 import { ThemeProvider } from "./contexts/theme";
+import "@/i18n";
 
 // TODO: Load this if user wants to
 // Steals focus from browser focus bar
