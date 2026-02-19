@@ -3,7 +3,7 @@ import { useTypedTranslation } from "@/i18n/useTypedTranslation";
 import { useState } from "react";
 
 const Home: React.FC = () => {
-  const { t } = useTypedTranslation();
+  const { t, i18n } = useTypedTranslation();
   const [stars, setStars] = useState(0);
 
   const {
@@ -84,6 +84,7 @@ const Home: React.FC = () => {
         max={3}
         onChange={(e) => setStars(Number(e.target.value))}
       />
+      <p>{i18n.language}</p>
     </>
   );
 };
