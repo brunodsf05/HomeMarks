@@ -84,7 +84,14 @@ const Home: React.FC = () => {
         max={3}
         onChange={(e) => setStars(Number(e.target.value))}
       />
-      <p>{i18n.language}</p>
+      <p>i18n.language: {i18n.language}</p>
+      <p>i18n.resolvedLanguage: {i18n.resolvedLanguage}</p>
+      <p>
+        i18n.options.supportedLngs:{" "}
+        {(i18n.options.supportedLngs as string[]).reduce(
+          (rest, locale) => `${rest}, ${locale}`,
+        )}
+      </p>
     </>
   );
 };
